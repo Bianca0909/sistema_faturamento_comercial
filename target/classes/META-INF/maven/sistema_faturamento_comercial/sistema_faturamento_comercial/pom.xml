@@ -4,4 +4,14 @@
   <artifactId>sistema_faturamento_comercial</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>sistema_faturamento_comercial</name>
+  
+    <dependencies>
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+    	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>8.0.31</version>
+	</dependency>
+ </dependencies>
+ 
 </project>
