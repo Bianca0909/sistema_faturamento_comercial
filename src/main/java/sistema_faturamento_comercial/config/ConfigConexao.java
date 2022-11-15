@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConfigConexao {
+	// Conexão com banco de dados, ao testar é necessário verificar as informações do database
 	public static Connection getConexao() {
 		Connection connection = null;
 		try {
