@@ -1,10 +1,12 @@
 package sistema_faturamento_comercial.domain;
 
+import java.util.Date;
+
 public class ExemploDomain {
 
 	private Integer id;
 	private String nome;
-
+	private Date data;
 	public ExemploDomain(Integer id, String nome) {
 		super();
 		this.nome = nome;
