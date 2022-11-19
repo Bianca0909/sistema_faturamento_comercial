@@ -1,12 +1,9 @@
 package sistema_faturamento_comercial.application;
 
-import java.util.List;
+import java.sql.Date;
 
-import javax.swing.JOptionPane;
-
-import sistema_faturamento_comercial.domain.ExemploDomain;
-import sistema_faturamento_comercial.service.ExemploService;
-import sistema_faturamento_comercial.util.NegocioException;
+import sistema_faturamento_comercial.domain.ClienteDomain;
+import sistema_faturamento_comercial.service.ClienteService;
 
 public class Application {
 
@@ -15,17 +12,26 @@ public class Application {
 		// Exemplo de instanciação na classe main para teste de conexão com banco de
 		// dados
 		// Testar tudo aqui antes de fazer o JFrame
-		ExemploDomain exemploDomain = new ExemploDomain();
-		exemploDomain.setNome("exemplo");
-
-		new ExemploService().inserirExemplo(exemploDomain);
-
-		try {
-			ExemploDomain exemplo = new ExemploService().buscarExemploPorId(2);
-			JOptionPane.showMessageDialog(null, "Exemplo encontrado: " + exemplo.getId() + exemplo.getNome());
-		} catch (NegocioException e) {
-			e.printStackTrace();
-		}
+//		ExemploDomain exemploDomain = new ExemploDomain();
+//		exemploDomain.setNome("exemplo");
+//
+//		new ExemploService().inserirExemplo(exemploDomain);
+//
+//		try {
+//			ExemploDomain exemplo = new ExemploService().buscarExemploPorId(2);
+//			JOptionPane.showMessageDialog(null, "Exemplo encontrado: " + exemplo.getId() + exemplo.getNome());
+//		} catch (NegocioException e) {
+//			e.printStackTrace();
+//		}
+		Date data = new Date(2022-11-19);
+		ClienteDomain clienteDomain = new ClienteDomain();
+		clienteDomain.setNome("nome");
+		clienteDomain.setEmail("email");
+		clienteDomain.setDocumento("documento");
+		clienteDomain.setDataNascimento(data);
+		new ClienteService().inserirCliente(clienteDomain);
+		
 	}
 
+	
 }
