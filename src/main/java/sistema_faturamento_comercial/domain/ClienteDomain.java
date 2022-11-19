@@ -1,19 +1,21 @@
 package sistema_faturamento_comercial.domain;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 public class ClienteDomain {
 	Integer id;
 	String nome;
 	String email;
 	String documento;
-	Date dataNascimento;
+	LocalDate dataNascimento;
 
 	public ClienteDomain() {
 
 	}
 
-	public ClienteDomain(Integer id, String nome, String email, String documento, Date dataNascimento) {
+	public ClienteDomain(Integer id, String nome, String email, String documento, LocalDate dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -21,7 +23,6 @@ public class ClienteDomain {
 		this.dataNascimento = dataNascimento;
 	}
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -54,11 +55,11 @@ public class ClienteDomain {
 		this.documento = documento;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

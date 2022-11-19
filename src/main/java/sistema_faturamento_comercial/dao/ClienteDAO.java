@@ -1,6 +1,7 @@
 package sistema_faturamento_comercial.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,8 @@ import sistema_faturamento_comercial.domain.ClienteDomain;
 import sistema_faturamento_comercial.util.NegocioException;
 
 public class ClienteDAO {
-
+	
+	
 	private String sqlInsert = "INSERT INTO cliente(nome, email, documento, data_nascimento) VALUES(?, ?, ?, ?)";
 
 	public String inserir(ClienteDomain cliente) {
@@ -23,8 +25,9 @@ public class ClienteDAO {
 			preparedStatement.setString(1, cliente.getNome());
 			preparedStatement.setString(2, cliente.getEmail());
 			preparedStatement.setString(3, cliente.getDocumento());
+			preparedStatement.setDate(4, Date.valueOf(cliente.getDataNascimento()));
 			preparedStatement.execute();
-
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,7 +67,7 @@ public class ClienteDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				ClienteDomain cliente = new ClienteDomain(rs.getInt("id"), rs.getString("nome"), rs.getString("email"),
-						rs.getString("documento"), rs.getDate("data_nascimento"));
+						rs.getString("documento"), rs.getDate("data_nascimento").toLocalDate());
 				resultado.add(cliente);
 			}
 		} catch (SQLException e) {
@@ -90,7 +93,7 @@ public class ClienteDAO {
 			ps.setString(1, cliente.getNome());
 			ps.setString(2, cliente.getEmail());
 			ps.setString(3, cliente.getDocumento());
-			ps.setDate(4, cliente.getDataNascimento());
+			ps.setDate(4, Date.valueOf(cliente.getDataNascimento()));
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -123,7 +126,7 @@ public class ClienteDAO {
 				clienteEncontrado.setNome(rs.getString("nome"));
 				clienteEncontrado.setEmail(rs.getString("email"));
 				clienteEncontrado.setDocumento(rs.getString("documento"));
-				clienteEncontrado.setDataNascimento(rs.getDate("data_nascimento"));
+				clienteEncontrado.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 			}
 			return clienteEncontrado;
 		} catch (SQLException e) {
