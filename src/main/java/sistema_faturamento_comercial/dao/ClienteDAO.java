@@ -17,7 +17,7 @@ public class ClienteDAO {
 	
 	private String sqlInsert = "INSERT INTO cliente(nome, email, documento, data_nascimento) VALUES(?, ?, ?, ?)";
 
-	public String inserir(ClienteDomain cliente) {
+	public String inserirCliente(ClienteDomain cliente) throws NegocioException {
 		try {
 			Connection connection = ConfigConexao.getConexao();
 			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
@@ -35,7 +35,7 @@ public class ClienteDAO {
 		return "Cliente cadastrado com sucesso";
 	}
 
-	public String excluir(Integer id) {
+	public String excluirCliente(Integer id) throws NegocioException{
 
 		String sql = "DELETE FROM cliente WHERE id = ?";
 
@@ -43,6 +43,7 @@ public class ClienteDAO {
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
 			ps.setInt(1, id);
+			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +57,7 @@ public class ClienteDAO {
 		return "Cliente excluido com sucesso";
 	}
 
-	public List<ClienteDomain> listarClientes() {
+	public List<ClienteDomain> listarClientes() throws NegocioException {
 		String sql = "SELECT id, nome, email, documento, data_nascimento FROM cliente ORDER BY id";
 
 		PreparedStatement ps = null;
@@ -85,7 +86,7 @@ public class ClienteDAO {
 		return resultado;
 	}
 
-	public String alterar(ClienteDomain cliente) {
+	public String alterarCliente(ClienteDomain cliente) throws NegocioException {
 		String sql = "UPDATE cliente SET nome = ?, email = ?, documento = ?, data_nascimento = ? WHERE id = ?";
 		PreparedStatement ps = null;
 		try {

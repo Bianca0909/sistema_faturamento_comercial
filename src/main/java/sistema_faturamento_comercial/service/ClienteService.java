@@ -8,22 +8,22 @@ import sistema_faturamento_comercial.util.NegocioException;
 
 public class ClienteService {
 
-	public String inserirCliente(ClienteDomain cliente) {
+	public String inserirCliente(ClienteDomain cliente) throws NegocioException {
 
 		ClienteBO clienteBo = new ClienteBO();
 		return clienteBo.incluirCliente(cliente);
 	}
 
-	public List<ClienteDomain> listarClientes() {
+	public List<ClienteDomain> listarClientes() throws NegocioException{
 		return new ClienteBO().listarClientes();
 	}
 
-	public void excluirCliente(Integer id) {
-		new ClienteBO().excluirCliente(id);
+	public String excluirCliente(Integer id) throws NegocioException {
+		return new ClienteBO().excluirCliente(id);
 	}
 
-	public String alterarCliente(ClienteDomain cliente) {
-		return new ClienteBO().alterar(cliente);
+	public String alterarCliente(ClienteDomain cliente) throws NegocioException {
+		return new ClienteBO().alterarCliente(cliente);
 	}
 
 	public ClienteDomain buscarClientePorId(Integer id) throws NegocioException {

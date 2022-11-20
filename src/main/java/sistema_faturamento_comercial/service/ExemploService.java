@@ -19,8 +19,8 @@ public class ExemploService {
 		return new ExemploBO().listarExemplos();
 	}
 
-	public void excluirExemplo(Integer id) {
-		new ExemploBO().excluirExemplo(id);
+	public String excluirExemplo(Integer id) {
+		return new ExemploBO().excluirExemplo(id);
 	}
 
 	public String alterarExemplo(ExemploDomain exemplo){
