@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ClienteDAO {
 		try {
 			Connection connection = ConfigConexao.getConexao();
 			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
-
+			
 			preparedStatement.setString(1, cliente.getNome());
 			preparedStatement.setString(2, cliente.getEmail());
 			preparedStatement.setString(3, cliente.getDocumento());
@@ -91,10 +92,12 @@ public class ClienteDAO {
 		PreparedStatement ps = null;
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
+			
 			ps.setString(1, cliente.getNome());
 			ps.setString(2, cliente.getEmail());
 			ps.setString(3, cliente.getDocumento());
 			ps.setDate(4, Date.valueOf(cliente.getDataNascimento()));
+			ps.setInt(5, cliente.getId());
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -107,18 +110,21 @@ public class ClienteDAO {
 			}
 		}
 
-		return "Exemplo alterado com sucesso";
+		return "Cliente alterado com sucesso";
 	}
 
 	public ClienteDomain buscarClientePorId(Integer id) throws NegocioException {
 		String sql = "SELECT id, nome, email, documento, data_nascimento FROM cliente WHERE id = ?";
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
 			ps.setInt(1, id);
 
 			ClienteDomain clienteEncontrado = null;
+			
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -129,7 +135,9 @@ public class ClienteDAO {
 				clienteEncontrado.setDocumento(rs.getString("documento"));
 				clienteEncontrado.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 			}
+			
 			return clienteEncontrado;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException("Erro ao buscar exemplo por id");

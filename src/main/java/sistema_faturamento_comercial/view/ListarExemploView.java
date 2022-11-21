@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import sistema_faturamento_comercial.domain.ExemploDomain;
 import sistema_faturamento_comercial.service.ExemploService;
 import javax.swing.ListSelectionModel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ListarExemploView extends JFrame {
 	private JPanel contentPane;
@@ -87,13 +88,14 @@ public class ListarExemploView extends JFrame {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(21, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addContainerGap(170, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(439)
 							.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 752, GroupLayout.PREFERRED_SIZE))
 					.addGap(20))
@@ -101,12 +103,12 @@ public class ListarExemploView extends JFrame {
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(99, Short.MAX_VALUE)
+					.addContainerGap(126, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnNewButton_1, 0, 0, Short.MAX_VALUE))
-						.addComponent(btnNewButton, Alignment.TRAILING, 0, 0, Short.MAX_VALUE))
+						.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnNewButton, 0, 0, Short.MAX_VALUE)
+							.addComponent(btnNewButton_1, 0, 0, Short.MAX_VALUE)))
 					.addGap(20)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 314, GroupLayout.PREFERRED_SIZE)
 					.addGap(27))

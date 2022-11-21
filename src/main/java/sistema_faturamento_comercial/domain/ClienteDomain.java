@@ -4,12 +4,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
-public class ClienteDomain {
-	Integer id;
-	String nome;
+public class ClienteDomain extends PessoaDomain {
+
 	String email;
-	String documento;
-	LocalDate dataNascimento;
 
 	public ClienteDomain() {
 
