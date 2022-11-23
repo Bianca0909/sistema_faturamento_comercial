@@ -12,7 +12,7 @@ public class ConfigConexao {
 			String driverName = "com.mysql.cj.jdbc.Driver";
 			Class.forName(driverName);
 			String serverName = "localhost";    //caminho do servidor do BD
-			String mydatabase ="teste";        //nome do seu banco de dados
+			String mydatabase ="sistema_faturamento_comercial";        //nome do seu banco de dados
 			String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 			String username = "root";        //nome de um usuário de seu BD
 			String password = "root";      //sua senha de acesso
