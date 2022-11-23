@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +13,21 @@ import sistema_faturamento_comercial.domain.ClienteDomain;
 import sistema_faturamento_comercial.util.NegocioException;
 
 public class ClienteDAO {
-	
-	
-	private String sqlInsert = "INSERT INTO cliente(nome, email, documento, data_nascimento) VALUES(?, ?, ?, ?)";
 
 	public String inserirCliente(ClienteDomain cliente) throws NegocioException {
+		
+		String sqlInsert = "INSERT INTO cliente(nome, email, documento, data_nascimento) VALUES(?, ?, ?, ?)";
+
 		try {
 			Connection connection = ConfigConexao.getConexao();
 			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
-			
+
 			preparedStatement.setString(1, cliente.getNome());
 			preparedStatement.setString(2, cliente.getEmail());
 			preparedStatement.setString(3, cliente.getDocumento());
 			preparedStatement.setDate(4, Date.valueOf(cliente.getDataNascimento()));
 			preparedStatement.execute();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,7 +35,7 @@ public class ClienteDAO {
 		return "Cliente cadastrado com sucesso";
 	}
 
-	public String excluirCliente(Integer id) throws NegocioException{
+	public String excluirCliente(Integer id) throws NegocioException {
 
 		String sql = "DELETE FROM cliente WHERE id = ?";
 
@@ -92,7 +91,7 @@ public class ClienteDAO {
 		PreparedStatement ps = null;
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
-			
+
 			ps.setString(1, cliente.getNome());
 			ps.setString(2, cliente.getEmail());
 			ps.setString(3, cliente.getDocumento());
@@ -115,16 +114,16 @@ public class ClienteDAO {
 
 	public ClienteDomain buscarClientePorId(Integer id) throws NegocioException {
 		String sql = "SELECT id, nome, email, documento, data_nascimento FROM cliente WHERE id = ?";
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
 			ps.setInt(1, id);
 
 			ClienteDomain clienteEncontrado = null;
-			
+
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -135,12 +134,12 @@ public class ClienteDAO {
 				clienteEncontrado.setDocumento(rs.getString("documento"));
 				clienteEncontrado.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 			}
-			
+
 			return clienteEncontrado;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new NegocioException("Erro ao buscar exemplo por id");
+			throw new NegocioException("Erro ao buscar cliente por id");
 		} finally {
 			try {
 				ps.close();
