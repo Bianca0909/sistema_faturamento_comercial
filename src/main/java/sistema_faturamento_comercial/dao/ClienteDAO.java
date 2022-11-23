@@ -15,9 +15,9 @@ import sistema_faturamento_comercial.util.NegocioException;
 public class ClienteDAO {
 
 	public String inserirCliente(ClienteDomain cliente) throws NegocioException {
-		
-		String sqlInsert = "INSERT INTO cliente(nome, email, documento, data_nascimento) VALUES(?, ?, ?, ?)";
 
+		String sqlInsert = "INSERT INTO cliente(nome, email, documento, data_nascimento) VALUES(?, ?, ?, ?)";
+		
 		try {
 			Connection connection = ConfigConexao.getConexao();
 			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);

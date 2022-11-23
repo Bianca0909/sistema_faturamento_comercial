@@ -5,24 +5,16 @@ import java.time.LocalDate;
 public class ClienteDomain extends PessoaDomain {
 
 	private String email;
-    private LocalDate dataNascimento;
-    
+
+	private LocalDate dataNascimento;
+
 	public ClienteDomain() {
 
 	}
 
-	public ClienteDomain(Integer id, String nome, String documento, String email, LocalDate dataNascimento) {
+	public ClienteDomain(Integer id, String nome, String email, String documento, LocalDate dataNascimento) {
 		super(id, nome, documento);
 		this.email = email;
-		this.dataNascimento = dataNascimento;
-	}
-
-	
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -34,6 +26,12 @@ public class ClienteDomain extends PessoaDomain {
 		this.email = email;
 	}
 
-	
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
 
 }

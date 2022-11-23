@@ -41,4 +41,6 @@ abstract class PessoaDomain {
 		this.documento = documento;
 	}
 
+	
+
 }
