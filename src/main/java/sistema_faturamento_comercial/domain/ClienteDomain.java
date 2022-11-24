@@ -1,13 +1,12 @@
 package sistema_faturamento_comercial.domain;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 public class ClienteDomain extends PessoaDomain {
 
 	String email;
-
+    LocalDate dataNascimento;
+    
 	public ClienteDomain() {
 
 	}

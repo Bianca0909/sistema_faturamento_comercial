@@ -1,7 +1,6 @@
 package sistema_faturamento_comercial.domain;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class FuncionarioDomain extends PessoaDomain {
 
