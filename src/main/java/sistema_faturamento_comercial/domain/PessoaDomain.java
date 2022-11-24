@@ -1,17 +1,16 @@
 package sistema_faturamento_comercial.domain;
 
-import java.time.LocalDate;
-
 abstract class PessoaDomain {
 
-	Integer id;
+	protected Integer id;
 	protected String nome;
 	protected String documento;
 
-	protected PessoaDomain() {
+	public PessoaDomain() {
 	}
 
-	public PessoaDomain(Integer id, String nome, String documento) {
+	public PessoaDomain(Integer id, String nome,String documento) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.documento = documento;

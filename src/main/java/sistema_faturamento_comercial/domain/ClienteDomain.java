@@ -4,9 +4,8 @@ import java.time.LocalDate;
 
 public class ClienteDomain extends PessoaDomain {
 
-	private String email;
-
-	private LocalDate dataNascimento;
+	String email;
+    LocalDate dataNascimento;
 
 	public ClienteDomain() {
 

@@ -3,6 +3,8 @@ package sistema_faturamento_comercial.application;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import sistema_faturamento_comercial.domain.EnderecoDomain;
+
 public class Application {
 
 	public static void main(String[] args) {
@@ -80,7 +82,6 @@ public class Application {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String dateString = date.format(formatter);
 		System.out.println(dateString);
-		
 		
 	}
 }
