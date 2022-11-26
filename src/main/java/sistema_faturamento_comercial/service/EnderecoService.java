@@ -8,25 +8,25 @@ import sistema_faturamento_comercial.util.NegocioException;
 
 public class EnderecoService {
 
-	public String inserirEndereco(EnderecoDomain endereco) throws NegocioException {
+	public void inserirEndereco(EnderecoDomain endereco) throws NegocioException {
 
 		EnderecoBO enderecoBo = new EnderecoBO();
-		return enderecoBo.incluirEndereco(endereco);
+		 enderecoBo.incluirEndereco(endereco);
 	}
 
 	public List<EnderecoDomain> listarEnderecos() throws NegocioException{
 		return new EnderecoBO().listarEnderecos();
 	}
 
-	public String excluirEndereco(Integer id) throws NegocioException {
-		return new EnderecoBO().excluirEnderecos(id);
+	public void excluirEndereco(Integer id) throws NegocioException {
+		 new EnderecoBO().excluirEnderecos(id);
 	}
 
-	public String alterarEndereco(EnderecoDomain cliente) throws NegocioException {
-		return new EnderecoBO().alterarEnderecos(cliente);
+	public void alterarEndereco(EnderecoDomain cliente) throws NegocioException {
+		 new EnderecoBO().alterarEndereco(cliente);
 	}
 
-	public EnderecoDomain buscarClientePorId(Integer id) throws NegocioException {
+	public EnderecoDomain buscarEnderecoPorId(Integer id) throws NegocioException {
 		return new EnderecoBO().buscarEnderecosPorId(id);
 	}
 

@@ -7,6 +7,7 @@ public class EnderecoDomain {
 	private String estado;
 	private String cidade;
 	private String cep;
+	private String bairro;
 	private String rua;
 	private Long numero;
 	private String complemento;
@@ -15,14 +16,14 @@ public class EnderecoDomain {
 			
 	}
 	
-	public EnderecoDomain(Integer id, String pais, String estado, String cidade, String cep, String rua, Long numero,
+	public EnderecoDomain(Integer id, String pais, String estado, String cidade, String cep, String bairro, String rua, Long numero,
 			String complemento) {
-		super();
 		this.id = id;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
 		this.cep = cep;
+		this.bairro = bairro;
 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;
@@ -66,6 +67,15 @@ public class EnderecoDomain {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+	
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 
 	public String getRua() {

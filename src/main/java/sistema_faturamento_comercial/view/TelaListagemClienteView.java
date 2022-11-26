@@ -21,6 +21,7 @@ import sistema_faturamento_comercial.util.NegocioException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
+import java.awt.Font;
 
 public class TelaListagemClienteView extends JFrame {
 
@@ -49,7 +50,7 @@ public class TelaListagemClienteView extends JFrame {
 	 */
 	public TelaListagemClienteView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 928, 413);
+		setBounds(100, 100, 934, 483);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -92,9 +93,18 @@ public class TelaListagemClienteView extends JFrame {
 				}
 			}
 		});
+		
+		JButton btnNewButton = new JButton("Sair");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(612)
 					.addComponent(excluirButton)
@@ -103,10 +113,14 @@ public class TelaListagemClienteView extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(inserirButton)
 					.addContainerGap(79, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(56, Short.MAX_VALUE)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 808, GroupLayout.PREFERRED_SIZE)
 					.addGap(40))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(410, Short.MAX_VALUE)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+					.addGap(397))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -118,7 +132,9 @@ public class TelaListagemClienteView extends JFrame {
 						.addComponent(inserirButton, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
 					.addGap(11)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
-					.addGap(11))
+					.addGap(18)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addGap(19))
 		);
 		
 		table = new JTable();
