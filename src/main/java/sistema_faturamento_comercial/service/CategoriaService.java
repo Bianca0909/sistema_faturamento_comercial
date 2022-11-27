@@ -2,32 +2,32 @@ package sistema_faturamento_comercial.service;
 
 import java.util.List;
 
-import sistema_faturamento_comercial.bo.ClienteBO;
-import sistema_faturamento_comercial.domain.ClienteDomain;
+import sistema_faturamento_comercial.bo.CategoriaBO;
+import sistema_faturamento_comercial.domain.CategoriaDomain;
 import sistema_faturamento_comercial.util.NegocioException;
 
 public class CategoriaService {
 
 	
-	public String inserirCategoria(ClienteDomain cliente) throws NegocioException {
+	public void inserirCategoria(CategoriaDomain Categoria) throws NegocioException {
 
-		ClienteBO clienteBo = new ClienteBO();
-		return clienteBo.incluirCliente(cliente);
+		CategoriaBO CategoriaBo = new CategoriaBO();
+		 CategoriaBo.incluirCategoria(Categoria);
 	}
 
-	public List<ClienteDomain> listarClientes() throws NegocioException{
-		return new ClienteBO().listarClientes();
+	public List<CategoriaDomain> listarCategorias() throws NegocioException{
+		return new CategoriaBO().listarCategorias();
 	}
 
-	public String excluirCliente(Integer id) throws NegocioException {
-		return new ClienteBO().excluirCliente(id);
+	public void excluirCategoria(Integer id) throws NegocioException {
+		 new CategoriaBO().excluirCategoria(id);
 	}
 
-	public String alterarCliente(ClienteDomain cliente) throws NegocioException {
-		return new ClienteBO().alterarCliente(cliente);
+	public void alterarCategoria(CategoriaDomain Categoria) throws NegocioException {
+		 new CategoriaBO().alterarCategoria(Categoria);
 	}
 
-	public ClienteDomain buscarClientePorId(Integer id) throws NegocioException {
-		return new ClienteBO().buscarClientePorId(id);
+	public CategoriaDomain buscarCategoriaPorId(Integer id) throws NegocioException {
+		return new CategoriaBO().buscarCategoriaPorId(id);
 	}
 }
