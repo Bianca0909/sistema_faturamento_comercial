@@ -101,6 +101,13 @@ public class EnderecoDomain {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+
+	@Override
+	public String toString() {
+		return this.getPais() +" - "+ this.getEstado() +" - "+ this.getCidade() +" - "+ this.getCep() +" - "+  this.getBairro() +" - "+ this.getRua() +" - "+ this.getNumero() +" - "+ this.getComplemento();
+	}
+
+	
 	
 	
 	

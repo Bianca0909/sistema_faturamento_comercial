@@ -14,7 +14,7 @@ import sistema_faturamento_comercial.util.NegocioException;
 public class FuncionarioDAO {
 
 	public String inserirFuncionario(FuncionarioDomain funcionario) {
-		String sqlInsert = "INSERT INTO funcionario(nome, pis, documento, salario, funcao, endereco) VALUES(?, ?, ?, ?, ?, ?)";
+		String sqlInsert = "INSERT INTO funcionario(nome, pis, documento, salario, funcao, endereco_id) VALUES(?, ?, ?, ?, ?, ?)";
 
 		try {
 			Connection connection = ConfigConexao.getConexao();
@@ -59,7 +59,7 @@ public class FuncionarioDAO {
 	}
 
 	public List<FuncionarioDomain> listarFuncionarios() throws NegocioException {
-		String sql = "SELECT id, nome, pis, documento, salario, funcao, endereco FROM funcionario ORDER BY id";
+		String sql = "SELECT id, nome, pis, documento, salario, funcao, endereco_id FROM funcionario ORDER BY id";
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -71,7 +71,7 @@ public class FuncionarioDAO {
 
 				FuncionarioDomain funcionario = new FuncionarioDomain(rs.getInt("id"), rs.getString("nome"),
 						rs.getString("documento"), rs.getString("pis"), rs.getBigDecimal("salario"),
-						rs.getString("funcao"), rs.getInt("endereco"));
+						rs.getString("funcao"),  rs.getInt("endereco_id"));
 
 			}
 		} catch (SQLException e) {
@@ -90,7 +90,7 @@ public class FuncionarioDAO {
 	}
 	
 	public String alterarFuncionario(FuncionarioDomain funcionario) throws NegocioException {
-		String sql = "UPDATE funcionario SET nome = ?, documento = ?, pis =?, salario = ?, funcao = ?, endereco =? WHERE id =?";
+		String sql = "UPDATE funcionario SET nome = ?, documento = ?, pis =?, salario = ?, funcao = ?, endereco_id =? WHERE id =?";
 		PreparedStatement ps = null;
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
@@ -119,7 +119,7 @@ public class FuncionarioDAO {
 	}
 	
 	public FuncionarioDomain buscarFuncionarioPorId(Integer id) throws NegocioException {
-		String sql = "SELECT id, nome, pis, documento, salario, funcao, endereco FROM funcionario WHERE id = ?";
+		String sql = "SELECT id, nome, pis, documento, salario, funcao, endereco_id FROM funcionario WHERE id = ?";
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -140,6 +140,7 @@ public class FuncionarioDAO {
 				funcionarioEncontrado.setPis(rs.getString("pis"));
 				funcionarioEncontrado.setSalario(rs.getBigDecimal("salario"));
 				funcionarioEncontrado.setFuncao(rs.getString("funcao"));
+				funcionarioEncontrado.setEndereco(rs.getInt("endereco_id"));
 			}
 			
 			return funcionarioEncontrado;
