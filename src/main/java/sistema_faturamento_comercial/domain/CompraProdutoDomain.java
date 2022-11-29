@@ -52,5 +52,9 @@ public class CompraProdutoDomain {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+	
+	public Double retornaTotal() {
+		return null;
+	}
 
 }

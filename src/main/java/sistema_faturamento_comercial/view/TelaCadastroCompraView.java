@@ -22,8 +22,8 @@ import javax.swing.JSpinner;
 public class TelaCadastroCompraView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_2;
+	private JTextField codigoField;
+	private JTextField totalField;
 
 	/**
 	 * Launch the application.
@@ -55,20 +55,20 @@ public class TelaCadastroCompraView extends JFrame {
 		JLabel lblNewLabel = new JLabel("Código:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		codigoField = new JTextField();
+		codigoField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cliente:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboCliente = new JComboBox();
 		
 		JLabel lblNewLabel_2 = new JLabel("Endereço:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JComboBox comboBox_1 = new JComboBox();
+		JComboBox combroEndereco = new JComboBox();
 		
-		JComboBox comboBox_2 = new JComboBox();
+		JComboBox comboProduto = new JComboBox();
 		
 		JLabel lblNewLabel_3 = new JLabel("Produto:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -80,13 +80,13 @@ public class TelaCadastroCompraView extends JFrame {
 		lblNewLabel_5.setForeground(new Color(255, 0, 0));
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		totalField = new JTextField();
+		totalField.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel("Forma de pagamento:");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JComboBox comboBox_3 = new JComboBox();
+		JComboBox formaPagamentoField = new JComboBox();
 		
 		JButton btnNewButton = new JButton("Finalizar");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -101,8 +101,8 @@ public class TelaCadastroCompraView extends JFrame {
 		JLabel lblNewLabel_7 = new JLabel("ÁREA DE COMPRA");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JSpinner contador = new JSpinner();
+		contador.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -123,25 +123,25 @@ public class TelaCadastroCompraView extends JFrame {
 											.addComponent(lblNewLabel_5, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)))
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(comboBox_1, 0, 963, Short.MAX_VALUE)
+										.addComponent(combroEndereco, 0, 963, Short.MAX_VALUE)
 										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+											.addComponent(codigoField, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 826, GroupLayout.PREFERRED_SIZE))
+											.addComponent(comboCliente, GroupLayout.PREFERRED_SIZE, 826, GroupLayout.PREFERRED_SIZE))
 										.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-											.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+											.addComponent(totalField, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
 											.addGap(18)
 											.addComponent(lblNewLabel_6)
 											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))
+											.addComponent(formaPagamentoField, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))
 										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(comboBox_2, 0, 737, Short.MAX_VALUE)
+											.addComponent(comboProduto, 0, 737, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addComponent(lblNewLabel_4)
 											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(spinner, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))))
+											.addComponent(contador, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED, 808, Short.MAX_VALUE)
@@ -160,9 +160,9 @@ public class TelaCadastroCompraView extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBox, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+								.addComponent(comboCliente, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
 								.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+								.addComponent(codigoField, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
 							.addGap(18))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(8)
@@ -170,24 +170,24 @@ public class TelaCadastroCompraView extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
+						.addComponent(combroEndereco, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBox_2, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+								.addComponent(comboProduto, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
 								.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
-							.addComponent(spinner)))
+							.addComponent(contador)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(27)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+								.addComponent(totalField, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_6, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(formaPagamentoField, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
 							.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
