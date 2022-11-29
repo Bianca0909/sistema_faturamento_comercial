@@ -18,9 +18,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import sistema_faturamento_comercial.domain.EnderecoDomain;
 import sistema_faturamento_comercial.domain.FuncionarioDomain;
+import sistema_faturamento_comercial.service.EnderecoService;
 import sistema_faturamento_comercial.service.FuncionarioService;
-import sistema_faturamento_comercial.service.MarcaService;
+import sistema_faturamento_comercial.util.NegocioException;
 
 public class TelaListagemFuncionarioView extends JFrame {
 
@@ -158,18 +160,21 @@ public class TelaListagemFuncionarioView extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		popularTabela();
 	}
-	
 	private void popularTabela() {
 		try {
 			funcionarios = new FuncionarioService().listarFuncionarios();
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.getDataVector().removeAllElements();
 
-			for (FuncionarioDomain funcionario : funcionarios) {
-				model.addRow(new Object[] { funcionario.getId(), funcionario.getNome(), funcionario.getPis(), funcionario.getDocumento(), funcionario.getSalario(), funcionario.getFuncao(), funcionario.getEndereco() });
+			for (FuncionarioDomain funcionarioDomain : funcionarios) {
+				model.addRow(new Object[] { funcionarioDomain.getId(), funcionarioDomain.getNome(), funcionarioDomain.getPis(),
+						funcionarioDomain.getDocumento(), funcionarioDomain.getSalario(), funcionarioDomain.getFuncao(), funcionarioDomain.getEndereco()});
 			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Erro ao buscar funcionários do banco de dados");
+		} catch (NegocioException e) {
+			// e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao buscar clientes do banco de dados");
 		}
 	}
+	
+	
 }
