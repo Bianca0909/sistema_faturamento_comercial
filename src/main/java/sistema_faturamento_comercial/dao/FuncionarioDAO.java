@@ -71,8 +71,8 @@ public class FuncionarioDAO {
 
 				FuncionarioDomain funcionario = new FuncionarioDomain(rs.getInt("id"), rs.getString("nome"),
 						rs.getString("documento"), rs.getString("pis"), rs.getBigDecimal("salario"),
-						rs.getString("funcao"),  rs.getInt("endereco_id"));
-
+						rs.getString("funcao"), rs.getInt("endereco_id"));
+				resultado.add(funcionario);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -88,13 +88,13 @@ public class FuncionarioDAO {
 
 		return resultado;
 	}
-	
+
 	public String alterarFuncionario(FuncionarioDomain funcionario) throws NegocioException {
 		String sql = "UPDATE funcionario SET nome = ?, documento = ?, pis =?, salario = ?, funcao = ?, endereco_id =? WHERE id =?";
 		PreparedStatement ps = null;
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
-			
+
 			ps.setString(1, funcionario.getNome());
 			ps.setString(2, funcionario.getDocumento());
 			ps.setString(3, funcionario.getPis());
@@ -102,7 +102,7 @@ public class FuncionarioDAO {
 			ps.setString(4, funcionario.getFuncao());
 			ps.setInt(5, funcionario.getEndereco());
 			ps.execute();
-			
+
 			ps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -117,19 +117,19 @@ public class FuncionarioDAO {
 
 		return "Funcionário alterado com sucesso";
 	}
-	
+
 	public FuncionarioDomain buscarFuncionarioPorId(Integer id) throws NegocioException {
 		String sql = "SELECT id, nome, pis, documento, salario, funcao, endereco_id FROM funcionario WHERE id = ?";
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		try {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
 			ps.setInt(1, id);
 
 			FuncionarioDomain funcionarioEncontrado = null;
-			
+
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -142,9 +142,9 @@ public class FuncionarioDAO {
 				funcionarioEncontrado.setFuncao(rs.getString("funcao"));
 				funcionarioEncontrado.setEndereco(rs.getInt("endereco_id"));
 			}
-			
+
 			return funcionarioEncontrado;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new NegocioException("Erro ao buscar funcionário por id");
