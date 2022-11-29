@@ -145,7 +145,7 @@ public class TelaListagemProdutoView extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"C\u00F3digo", "Nome", "Descrição", "Preço", "Quantidade", "Marca_id", "Categoria_id"
+				"C\u00F3digo", "Nome", "Descrição", "Preço", "Quantidade", "Código Marca", "Código Categoria"
 			}
 		));
 		scrollPane.setViewportView(table);

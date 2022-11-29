@@ -71,7 +71,7 @@ public class TelaCadastroProdutoView extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Descricao:");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		JLabel lblNewLabel_5 = new JLabel("Id_Marca:");
+		JLabel lblNewLabel_5 = new JLabel("Código Marca:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JLabel lblNewLabel_7 = new JLabel("Preço:");
@@ -133,7 +133,7 @@ public class TelaCadastroProdutoView extends JFrame {
 		});
 		cadastrarButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		JLabel lblNewLabel_9 = new JLabel("Id_Categoria:");
+		JLabel lblNewLabel_9 = new JLabel("Código Categoria:");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		categoriaIdField = new JTextField();
@@ -157,16 +157,16 @@ public class TelaCadastroProdutoView extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(voltarButton)
-									.addPreferredGap(ComponentPlacement.RELATED, 614, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 612, Short.MAX_VALUE)
 									.addComponent(cadastrarButton))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(nomeField, GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE))
+									.addComponent(nomeField, GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblNewLabel_3)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(descricaoField, GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE))
+									.addComponent(descricaoField, GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblNewLabel_1)
 									.addGap(18)
@@ -175,19 +175,20 @@ public class TelaCadastroProdutoView extends JFrame {
 									.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addComponent(precoField, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_contentPane.createSequentialGroup()
 										.addComponent(lblNewLabel_4)
 										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(quantidadeField))
-									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-										.addComponent(lblNewLabel_5)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(marcaIdField))
-									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-										.addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(categoriaIdField, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))))))
+										.addComponent(quantidadeField, 364, 364, 364))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(lblNewLabel_5)
+											.addGap(18)
+											.addComponent(marcaIdField))
+										.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+											.addComponent(lblNewLabel_9)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addComponent(categoriaIdField, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -223,7 +224,7 @@ public class TelaCadastroProdutoView extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(quantidadeField, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_4))
-					.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(voltarButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(cadastrarButton, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
