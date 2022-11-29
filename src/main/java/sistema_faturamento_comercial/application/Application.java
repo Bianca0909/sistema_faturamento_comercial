@@ -2,8 +2,11 @@ package sistema_faturamento_comercial.application;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-import sistema_faturamento_comercial.domain.EnderecoDomain;
+import sistema_faturamento_comercial.domain.FuncionarioDomain;
+import sistema_faturamento_comercial.service.FuncionarioService;
+import sistema_faturamento_comercial.util.NegocioException;
 
 public class Application {
 
@@ -40,19 +43,16 @@ public class Application {
 //		e.printStackTrace();
 //	}
 	
-//	List<ClienteDomain> clientes;
-//	try {
-//		clientes = new ClienteService().listarClientes();
-//		for(ClienteDomain clienteDomain: clientes) {
-//			System.out.println("Id: "+ clienteDomain.getId()+ "| Nome: " + clienteDomain.getNome() + "| Email: " + clienteDomain.getEmail() 
-//			+ "|Documento: " + clienteDomain.getDocumento() + "|Data de nascimento: " + clienteDomain.getDataNascimento());
-//		}
-//	} catch (NegocioException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//
-	
+	List<FuncionarioDomain> funcionarios;
+	try {
+		funcionarios = new FuncionarioService().listarFuncionarios();
+		for(FuncionarioDomain funcionarioDomain: funcionarios) {
+			System.out.println("Id: "+ funcionarioDomain.getId());
+		}
+	} catch (NegocioException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 //	
 //	
 //	ClienteDomain cliente;
@@ -78,10 +78,10 @@ public class Application {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		LocalDate date = LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String dateString = date.format(formatter);
-		System.out.println(dateString);
+//		LocalDate date = LocalDate.now();
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//		String dateString = date.format(formatter);
+//		System.out.println(dateString);
 		
 	}
 }

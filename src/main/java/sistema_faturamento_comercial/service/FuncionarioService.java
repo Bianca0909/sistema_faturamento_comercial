@@ -24,7 +24,7 @@ public class FuncionarioService {
 		return new FuncionarioBO().excluirFuncionario(id);
 	}
 
-	public String alterarCliente(FuncionarioDomain funcionario) throws NegocioException {
+	public String alterarFuncionario(FuncionarioDomain funcionario) throws NegocioException {
 		return new FuncionarioBO().alterarFuncionario(funcionario);
 	}
 

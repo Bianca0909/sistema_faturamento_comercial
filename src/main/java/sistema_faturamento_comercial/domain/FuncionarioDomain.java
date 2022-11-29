@@ -7,18 +7,18 @@ public class FuncionarioDomain extends PessoaDomain {
 	private String pis;
 	private BigDecimal salario;
 	private String funcao;
-    private Integer enderecoId;
+    private Integer endereco;
     
 	public FuncionarioDomain() {
 	}
 
 	public FuncionarioDomain(Integer id, String nome, String documento, String pis,
-			BigDecimal salario, String funcao, Integer enderecoId) {
+			BigDecimal salario, String funcao, Integer endereco) {
 		super(id, nome, documento);
 		this.pis = pis;
 		this.salario = salario;
 		this.funcao = funcao;
-		this.enderecoId = enderecoId;
+		this.endereco = endereco;
 
 	}
 
@@ -47,12 +47,13 @@ public class FuncionarioDomain extends PessoaDomain {
 	}
 
 	public Integer getEndereco() {
-		return enderecoId;
+		return endereco;
 	}
 
-	public void setEndereco(Integer enderecoId) {
-		this.enderecoId = enderecoId;
+	public void setEndereco(Integer endereco) {
+		this.endereco = endereco;
 	}
+	
 	
 	
 }
