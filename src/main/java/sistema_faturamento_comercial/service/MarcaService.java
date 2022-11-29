@@ -15,7 +15,7 @@ public class MarcaService {
 		MarcaBo.incluirMarca(Marca);
 	}
 
-	public List<MarcaDomain> listarMarca() throws NegocioException {
+	public List<MarcaDomain> listarMarcas() throws NegocioException {
 		return new MarcaBO().listarMarcas();
 	}
 

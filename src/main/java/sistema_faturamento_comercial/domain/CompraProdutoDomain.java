@@ -1,6 +1,6 @@
 package sistema_faturamento_comercial.domain;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 public class CompraProdutoDomain {
 
@@ -8,17 +8,19 @@ public class CompraProdutoDomain {
 	private Integer produtoId;
 	private Integer compraId;
 	private Integer quantidade;
+	private BigDecimal total;
 
 	public CompraProdutoDomain() {
 
 	}
 
 	public CompraProdutoDomain(Integer id,  Integer compraId, Integer produtoId,
-			Integer quantidade) {
+			Integer quantidade, BigDecimal total) {
 		this.id = id;
 		this.produtoId = produtoId;
 		this.compraId = compraId;
 		this.quantidade = quantidade;
+		this.total = total;
 	}
 
 	public Integer getId() {
@@ -53,8 +55,19 @@ public class CompraProdutoDomain {
 		this.quantidade = quantidade;
 	}
 	
-	public Double retornaTotal() {
-		return null;
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public BigDecimal retornaTotal(ProdutoDomain produto, Integer quantidade) {
+		BigDecimal valorTotal = produto.getPreco().multiply(BigDecimal.valueOf(quantidade));
+		total = valorTotal;
+		return total;
+		
 	}
 
 }

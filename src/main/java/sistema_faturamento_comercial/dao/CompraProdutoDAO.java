@@ -1,7 +1,6 @@
 package sistema_faturamento_comercial.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,13 +10,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import sistema_faturamento_comercial.config.ConfigConexao;
-import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.CompraProdutoDomain;
-import sistema_faturamento_comercial.util.NegocioException;
 
 public class CompraProdutoDAO {
 
-	private String sqlInsert = "INSERT INTO compra_produto(compra_id, produto_id, quantidade) VALUES(?, ?, ?, ?)";
+	private String sqlInsert = "INSERT INTO compra_produto(compra_id, produto_id, quantidade, total) VALUES(?, ?, ?, ?)";
 
 	public void inserirCompraProduto(CompraProdutoDomain compraProduto) {
 		try {
@@ -27,12 +24,15 @@ public class CompraProdutoDAO {
 			preparedStatement.setInt(1, compraProduto.getCompraId());
 			preparedStatement.setInt(2, compraProduto.getProdutoId());
 			preparedStatement.setInt(3, compraProduto.getQuantidade());
+			preparedStatement.setBigDecimal(4, compraProduto.getTotal());
 			
 			preparedStatement.execute(); 
 
 		} catch (Exception e) {
 			System.err.print(e.getMessage()); 
 		}
+		JOptionPane.showMessageDialog(null, "Compra cadastrada com sucesso");
+		JOptionPane.showMessageDialog(null, compraProduto.toString());
 	}
 
 	public void excluirCompraProduto(Integer id) {
@@ -60,7 +60,7 @@ public class CompraProdutoDAO {
 
 	public List<CompraProdutoDomain> listarCompraProdutos() {
 
-		String sql = "SELECT id, compra_id, produto_id, quantidade FROM compra_produto ORDER BY id";
+		String sql = "SELECT id, compra_id, produto_id, quantidade, total FROM compra_produto ORDER BY id";
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -73,7 +73,7 @@ public class CompraProdutoDAO {
 
 			while (rs.next()) {
 				CompraProdutoDomain compraProduto = new CompraProdutoDomain(rs.getInt("id"), rs.getInt("compra_id"), 
-						rs.getInt("produto_id"), rs.getInt("quantidade"));
+						rs.getInt("produto_id"), rs.getInt("quantidade"), rs.getBigDecimal("total"));
 				resultado.add(compraProduto);
 			}
 		} catch (SQLException e) {
@@ -92,7 +92,7 @@ public class CompraProdutoDAO {
 
 	public void alterarCompraProduto(CompraProdutoDomain compraProduto) {
 
-		String sql = "UPDATE compra SET compra_id = ?, produto_id = ?, quantidade = ? WHERE id = ?";
+		String sql = "UPDATE compra SET compra_id = ?, produto_id = ?, quantidade = ?, total = ? WHERE id = ?";
 
 		PreparedStatement ps = null;
 
@@ -102,7 +102,8 @@ public class CompraProdutoDAO {
 			ps.setInt(1, compraProduto.getCompraId());
 			ps.setInt(2, compraProduto.getProdutoId());
 			ps.setInt(3, compraProduto.getQuantidade());
-			ps.setInt(4, compraProduto.getId());
+			ps.setBigDecimal(4, compraProduto.getTotal());
+			ps.setInt(5, compraProduto.getId());
 			ps.execute();
 			
 			ps.execute();

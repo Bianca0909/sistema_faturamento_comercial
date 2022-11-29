@@ -24,17 +24,15 @@ public class CompraDAO {
 			Connection connection = ConfigConexao.getConexao(); 
 			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert); 
 
-			preparedStatement.setDate(4, Date.valueOf(compra.getDataCompra()));
-			preparedStatement.setString(1, compra.getFormaPagamento());
-			preparedStatement.setInt(1, compra.getEnderecoId());
-			preparedStatement.setInt(1, compra.getClienteId());
-			
+			preparedStatement.setDate(1, Date.valueOf(compra.getDataCompra()));
+			preparedStatement.setString(2, compra.getFormaPagamento());
+			preparedStatement.setInt(3, compra.getEnderecoId());
+			preparedStatement.setInt(4, compra.getClienteId());
 			preparedStatement.execute(); 
 
 		} catch (Exception e) {
 			System.err.print(e.getMessage()); 
 		}
-		JOptionPane.showMessageDialog(null, "Compra cadastrada com sucesso");
 	}
 
 	public void excluirCompra(Integer id) {

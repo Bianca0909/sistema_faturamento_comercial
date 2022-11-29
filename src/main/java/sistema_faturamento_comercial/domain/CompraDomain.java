@@ -62,6 +62,11 @@ public class CompraDomain {
 	public void setFormaPagamento(String formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
+
+	@Override
+	public String toString() {
+		return this.getId() + " - "+ this.dataCompra;
+	}
 	
 	
 	

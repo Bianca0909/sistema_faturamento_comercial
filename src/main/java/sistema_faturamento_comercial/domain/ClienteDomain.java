@@ -1,6 +1,7 @@
 package sistema_faturamento_comercial.domain;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ClienteDomain extends PessoaDomain {
 
@@ -33,4 +34,13 @@ public class ClienteDomain extends PessoaDomain {
 		this.dataNascimento = dataNascimento;
 	}
 
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
+	@Override
+	public String toString() {
+		return this.getNome() + " - " + this.getDocumento() + " - " + formatter.format(this.getDataNascimento()) + " - " +
+	this.getEmail();
+ 	}
+
+	
 }
