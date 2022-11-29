@@ -145,7 +145,7 @@ public class TelaListagemMarcaView extends JFrame {
 
 	private void popularTabela() {
 		try {
-			marcas = new MarcaService().listarMarca();
+			marcas = new MarcaService().listarMarcas();
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			model.getDataVector().removeAllElements();
 

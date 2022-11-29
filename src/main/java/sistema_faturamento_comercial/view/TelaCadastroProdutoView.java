@@ -1,25 +1,33 @@
 package sistema_faturamento_comercial.view;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import sistema_faturamento_comercial.domain.ProdutoDomain;
-import sistema_faturamento_comercial.service.ProdutoService;
-import sistema_faturamento_comercial.util.NegocioException;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
+import sistema_faturamento_comercial.domain.CategoriaDomain;
+import sistema_faturamento_comercial.domain.MarcaDomain;
+import sistema_faturamento_comercial.domain.ProdutoDomain;
+import sistema_faturamento_comercial.service.CategoriaService;
+import sistema_faturamento_comercial.service.MarcaService;
+import sistema_faturamento_comercial.service.ProdutoService;
+import sistema_faturamento_comercial.util.NegocioException;
 
 public class TelaCadastroProdutoView extends JFrame {
 
@@ -27,11 +35,10 @@ public class TelaCadastroProdutoView extends JFrame {
 	private JTextField codigoField;
 	private JTextField nomeField;
 	private JTextField descricaoField;
-	private JTextField marcaIdField;
 	private JTextField precoField;
-	private JTextField categoriaIdField;
 	private JTextField quantidadeField;
-
+	private List<CategoriaDomain> categorias;
+	private List<MarcaDomain> marcas;
 	/**
 	 * Launch the application.
 	 */
@@ -87,9 +94,6 @@ public class TelaCadastroProdutoView extends JFrame {
 		descricaoField = new JTextField();
 		descricaoField.setColumns(10);
 		
-		marcaIdField = new JTextField();
-		marcaIdField.setColumns(10);
-		
 		precoField = new JTextField();
 		precoField.setColumns(10);
 		
@@ -103,15 +107,64 @@ public class TelaCadastroProdutoView extends JFrame {
 		});
 		voltarButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
+		final JComboBox comboCategoria = new JComboBox();
+		comboCategoria.addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+				CategoriaService categoriaService = new CategoriaService();
+				try {
+					categorias = categoriaService.listarCategorias();
+					comboCategoria.removeAll();
+					for (CategoriaDomain categoria : categorias) {
+						comboCategoria.addItem(categoria);
+					}
+
+				} catch (NegocioException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
+		
+		final JComboBox comboMarca = new JComboBox();
+		comboMarca.addAncestorListener(new AncestorListener() {
+			public void ancestorAdded(AncestorEvent event) {
+				MarcaService marcaService = new MarcaService();
+				try {
+					marcas = marcaService.listarMarcas();
+					comboMarca.removeAll();
+					for (MarcaDomain marca : marcas) {
+						comboMarca.addItem(marca);
+					}
+
+				} catch (NegocioException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			public void ancestorMoved(AncestorEvent event) {
+			}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
+		});
+		
 		JButton cadastrarButton = new JButton("Cadastrar");
 		cadastrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ProdutoDomain ProdutoDomain = new ProdutoDomain();
+				CategoriaDomain categoria = new CategoriaDomain();
+				MarcaDomain marca = new MarcaDomain();
 				
 				ProdutoDomain.setNome(nomeField.getText());
 				ProdutoDomain.setDescricao(descricaoField.getText());
-				ProdutoDomain.setMarcaId(Integer.parseInt(marcaIdField.getText()));
-				ProdutoDomain.setCategoriaId(Integer.parseInt(categoriaIdField.getText()));
+				marca = (MarcaDomain) comboMarca.getSelectedItem();
+				ProdutoDomain.setMarcaId(marca.getId());
+				categoria =  (CategoriaDomain) comboCategoria.getSelectedItem();
+				ProdutoDomain.setCategoriaId(categoria.getId());
 				ProdutoDomain.setPreco(new BigDecimal(precoField.getText().replace(",", ".")));
 				ProdutoDomain.setQuantidade(Integer.parseInt(quantidadeField.getText()));
 				
@@ -136,14 +189,13 @@ public class TelaCadastroProdutoView extends JFrame {
 		JLabel lblNewLabel_9 = new JLabel("Código Categoria:");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		categoriaIdField = new JTextField();
-		categoriaIdField.setColumns(10);
-		
 		quantidadeField = new JTextField();
 		quantidadeField.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Quantidade:");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -156,39 +208,45 @@ public class TelaCadastroProdutoView extends JFrame {
 							.addGap(23)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(voltarButton)
-									.addPreferredGap(ComponentPlacement.RELATED, 612, Short.MAX_VALUE)
-									.addComponent(cadastrarButton))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(nomeField, GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblNewLabel_3)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(descricaoField, GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+									.addComponent(descricaoField, GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel_1)
-									.addGap(18)
-									.addComponent(codigoField, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblNewLabel_1)
+										.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+									.addGap(28)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(codigoField, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+										.addComponent(nomeField, GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(precoField, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(lblNewLabel_4)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(quantidadeField, 364, 364, 364))
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(lblNewLabel_5)
-											.addGap(18)
-											.addComponent(marcaIdField))
-										.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 											.addComponent(lblNewLabel_9)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(categoriaIdField, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))))))
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(lblNewLabel_5))
+											.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGap(1)
+											.addComponent(voltarButton, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(quantidadeField)
+												.addComponent(comboMarca, 0, 174, Short.MAX_VALUE)
+												.addComponent(precoField)
+												.addComponent(comboCategoria, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(ComponentPlacement.RELATED, 462, Short.MAX_VALUE))
+										.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(cadastrarButton, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+											.addGap(6)))))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -208,27 +266,34 @@ public class TelaCadastroProdutoView extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_3)
 						.addComponent(descricaoField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_7)
-						.addComponent(precoField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-					.addGap(16)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_9)
-						.addComponent(categoriaIdField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-					.addGap(13)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_5)
-						.addComponent(marcaIdField, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(quantidadeField, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_4))
-					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(voltarButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(cadastrarButton, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-					.addContainerGap())
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_7)
+								.addComponent(precoField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(16)
+									.addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(comboCategoria, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+								.addComponent(comboMarca, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_4)
+								.addComponent(quantidadeField, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+							.addComponent(voltarButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(25))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(cadastrarButton, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+							.addGap(17))))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -237,8 +302,6 @@ public class TelaCadastroProdutoView extends JFrame {
 		codigoField.setText("");
 		nomeField.setText("");
 		descricaoField.setText("");
-		marcaIdField.setText("");
-		categoriaIdField.setText("");
 		precoField.setText("");
 		quantidadeField.setText("");
 	}
@@ -253,8 +316,6 @@ public class TelaCadastroProdutoView extends JFrame {
 				codigoField.setText(Integer.toString(ProdutoEncontrado.getId()));
 				nomeField.setText(ProdutoEncontrado.getNome());
 				descricaoField.setText(ProdutoEncontrado.getDescricao());
-				marcaIdField.setText(ProdutoEncontrado.getMarcaId().toString());
-				categoriaIdField.setText(ProdutoEncontrado.getCategoriaId().toString());
 				precoField.setText(ProdutoEncontrado.getPreco().toString());
 				quantidadeField.setText(ProdutoEncontrado.getQuantidade().toString());
 			}
