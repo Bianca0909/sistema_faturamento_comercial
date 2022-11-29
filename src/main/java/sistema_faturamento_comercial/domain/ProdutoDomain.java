@@ -70,5 +70,12 @@ public class ProdutoDomain {
 	public void setCategoriaId(Integer categoriaId) {
 		this.categoriaId = categoriaId;
 	}
+
+	@Override
+	public String toString() {
+		return this.getNome() + "- R$" + this.getPreco() + "Qtde:  " + " " + this.getQuantidade();
+	}
+	
+	
 	
 }
