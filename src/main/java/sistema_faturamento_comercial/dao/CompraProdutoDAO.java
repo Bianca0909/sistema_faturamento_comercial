@@ -10,7 +10,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import sistema_faturamento_comercial.config.ConfigConexao;
+import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.CompraProdutoDomain;
+import sistema_faturamento_comercial.util.NegocioException;
 
 public class CompraProdutoDAO {
 
@@ -119,6 +121,46 @@ public class CompraProdutoDAO {
 		}
 
 		JOptionPane.showMessageDialog(null, "Compra alterada com sucesso");
+	}
+	
+	public CompraProdutoDomain buscarCompraProdutoPorId(Integer id) throws NegocioException {
+
+		String sql = "SELECT id, compra_id, produto_id, quantidade, total FROM compra_produto WHERE id = ?";
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = ConfigConexao.getConexao().prepareStatement(sql);
+			ps.setLong(1, id);
+
+			CompraProdutoDomain compraProdutoEncontrada = null;
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				compraProdutoEncontrada = new CompraProdutoDomain();
+				compraProdutoEncontrada.setId(rs.getInt("id"));
+				compraProdutoEncontrada.setCompraId(rs.getInt("compra_id"));
+				compraProdutoEncontrada.setProdutoId(rs.getInt("produto_id"));
+				compraProdutoEncontrada.setQuantidade(rs.getInt("quantidade"));
+				compraProdutoEncontrada.setTotal(rs.getBigDecimal("total"));
+				
+			}
+
+			return compraProdutoEncontrada;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new NegocioException("Erro ao buscar detalhes da compra por id");
+		} finally {
+			try {
+				ps.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }
