@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -23,10 +24,12 @@ import javax.swing.event.AncestorListener;
 import sistema_faturamento_comercial.domain.ClienteDomain;
 import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.EnderecoDomain;
+import sistema_faturamento_comercial.domain.FuncionarioDomain;
 import sistema_faturamento_comercial.domain.ProdutoDomain;
 import sistema_faturamento_comercial.service.ClienteService;
 import sistema_faturamento_comercial.service.CompraService;
 import sistema_faturamento_comercial.service.EnderecoService;
+import sistema_faturamento_comercial.service.FuncionarioService;
 import sistema_faturamento_comercial.util.NegocioException;
 
 public class TelaCadastroCompraView extends JFrame {
@@ -243,5 +246,22 @@ public class TelaCadastroCompraView extends JFrame {
 						.addComponent(formaPagamentoField, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void carregarCompraPorId(Integer id) {
+		try {
+			CompraDomain compraEncontrada = new CompraService().buscarCompraPorId(id);
+
+			if (compraEncontrada == null) {
+				JOptionPane.showMessageDialog(null, "Funcionário não foi localizado", "Erro", JOptionPane.ERROR_MESSAGE);
+			} else {
+				codigoField.setText(Integer.toString(compraEncontrada.getId()));
+				
+				
+			}
+
+		} catch (NegocioException e) {
+			JOptionPane.showMessageDialog(null, e.getMensagemDeErro(), "Erro", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

@@ -2,6 +2,8 @@ package sistema_faturamento_comercial.view;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -13,12 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import sistema_faturamento_comercial.domain.CompraDomain;
-import sistema_faturamento_comercial.domain.CompraProdutoDomain;
-import sistema_faturamento_comercial.service.CompraProdutoService;
 import sistema_faturamento_comercial.service.CompraService;
 
 public class TelaListagemCompraView extends JFrame {
@@ -48,7 +49,7 @@ public class TelaListagemCompraView extends JFrame {
 	 */
 	public TelaListagemCompraView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 901, 440);
+		setBounds(100, 100, 901, 469);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -57,26 +58,78 @@ public class TelaListagemCompraView extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		JButton btnNewButton = new JButton("Adicionar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroCompraView telaCadastroCompra = new TelaCadastroCompraView();
+				telaCadastroCompra.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CompraDomain compraSelecionada = compras.get(table.getSelectedRow());
+				TelaCadastroCompraView telaCadastroCompra = new TelaCadastroCompraView();
+				telaCadastroCompra.carregarCompraPorId(compraSelecionada.getId());
+				telaCadastroCompra.setVisible(true);
+				dispose();
+				
+			}
+		});
 		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CompraDomain compraSelecionada = compras.get(table.getSelectedRow());
+                if (JOptionPane.showConfirmDialog(null, "Deseja excluir a compra?") == JOptionPane.OK_OPTION) {
+                    try {
+                        new CompraService().excluirCompra(compraSelecionada.getId());
+                        popularTabela();
+                    } catch (Exception e1) {
+                        JOptionPane.showMessageDialog(null, e1.getMessage());
+                    }
+                }
+			}
+		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton detalhesButton = new JButton("Detalhes");
+		detalhesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListagemCompraProdutoView telaListagemCompraProduto = new TelaListagemCompraProdutoView();
+				telaListagemCompraProduto.setVisible(true);
+				dispose();
+			}
+		});
 		detalhesButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JButton btnNewButton_1 = new JButton("Sair");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JButton btnNewButton_1_1 = new JButton("Voltar");
+		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 667, Short.MAX_VALUE)
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(detalhesButton)
-							.addPreferredGap(ComponentPlacement.RELATED, 511, Short.MAX_VALUE)
-							.addComponent(btnExcluir)
+							.addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
+							.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnEditar)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -87,19 +140,24 @@ public class TelaListagemCompraView extends JFrame {
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(87, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-							.addComponent(detalhesButton, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
-						.addComponent(btnEditar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(80, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnExcluir, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(detalhesButton, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+							.addComponent(btnEditar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 					.addGap(18)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE)
-					.addGap(36))
+					.addGap(19)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnNewButton_1_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},

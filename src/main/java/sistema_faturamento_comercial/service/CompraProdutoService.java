@@ -26,4 +26,7 @@ public class CompraProdutoService {
 		new CompraProdutoBO().alterarCompraProduto(CompraProduto);
 	}
 
+	public CompraProdutoDomain buscarCompraProdutoPorId(Integer id) throws NegocioException {
+		return new CompraProdutoBO().buscarCompraProdutoPorId(id);
+	}
 }

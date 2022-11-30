@@ -2,8 +2,11 @@ package sistema_faturamento_comercial.bo;
 
 import java.util.List;
 
+import sistema_faturamento_comercial.dao.CompraDAO;
 import sistema_faturamento_comercial.dao.CompraProdutoDAO;
+import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.CompraProdutoDomain;
+import sistema_faturamento_comercial.util.NegocioException;
 
 public class CompraProdutoBO {
 
@@ -23,6 +26,10 @@ public class CompraProdutoBO {
 
 	public void alterarCompraProduto(CompraProdutoDomain CompraProduto) {
 		 new CompraProdutoDAO().alterarCompraProduto(CompraProduto);
+	}
+	
+	public CompraProdutoDomain buscarCompraProdutoPorId(Integer id) throws NegocioException {
+		return new CompraProdutoDAO().buscarCompraProdutoPorId(id);
 	}
 
 }
