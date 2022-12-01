@@ -16,9 +16,12 @@ import javax.swing.table.DefaultTableModel;
 import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.CompraProdutoDomain;
 import sistema_faturamento_comercial.domain.FuncionarioDomain;
+import sistema_faturamento_comercial.domain.ProdutoDomain;
 import sistema_faturamento_comercial.service.CompraProdutoService;
 import sistema_faturamento_comercial.service.CompraService;
 import sistema_faturamento_comercial.service.FuncionarioService;
+import sistema_faturamento_comercial.util.NegocioException;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
@@ -95,12 +98,14 @@ public class TelaListagemCompraProdutoView extends JFrame {
 		btnNewButton_2 = new JButton("Excluir");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ProdutoDomain produtoDomain = new ProdutoDomain();
 				CompraProdutoDomain compraProdutoSelecionada = compraProdutos.get(table.getSelectedRow());
                 if (JOptionPane.showConfirmDialog(null, "Deseja excluir a compra?") == JOptionPane.OK_OPTION) {
                     try {
                         new CompraProdutoService().excluirCompraProduto(compraProdutoSelecionada.getId());
+//                        produtoDomain.acrescentaQuantidade(compraProdutoSelecionada.getQuantidade());
                         popularTabela();
-                    } catch (Exception e1) {
+                    } catch (NegocioException e1) {
                         JOptionPane.showMessageDialog(null, e1.getMessage());
                     }
                 }

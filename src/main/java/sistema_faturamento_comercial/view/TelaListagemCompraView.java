@@ -115,6 +115,13 @@ public class TelaListagemCompraView extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton btnNewButton_1_1 = new JButton("Voltar");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuView telaMenu = new TelaMenuView();
+				telaMenu.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
