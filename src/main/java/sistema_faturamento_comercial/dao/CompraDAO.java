@@ -46,17 +46,20 @@ public class CompraDAO {
 			ps.setLong(1, id);
 
 			ps.execute();
-
+			
+			JOptionPane.showMessageDialog(null, "Compra excluída com sucesso");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro: A compra " + id + " não pode ser excluída com itens ainda vinculados");
+//			e.printStackTrace();
 		} finally {
 			try {
 				ps.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
+				
 			}
 		}
-		JOptionPane.showMessageDialog(null, "Compra excluída com sucesso");
+		
 	}
 
 	public List<CompraDomain> listarCompras() {

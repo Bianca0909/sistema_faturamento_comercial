@@ -99,6 +99,10 @@ public class TelaListagemFuncionarioView extends JFrame {
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TelaMenuView telaMenu = new TelaMenuView();
+				telaMenu.setVisible(true);
+				dispose();
+				
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));

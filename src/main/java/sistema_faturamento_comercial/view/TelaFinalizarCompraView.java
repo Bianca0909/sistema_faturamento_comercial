@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+import sistema_faturamento_comercial.dao.ProdutoDAO;
 import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.CompraProdutoDomain;
 import sistema_faturamento_comercial.domain.ProdutoDomain;
@@ -135,7 +136,8 @@ public class TelaFinalizarCompraView extends JFrame {
 				CompraProdutoDomain compraProduto = new CompraProdutoDomain();
 				ProdutoDomain produto = new ProdutoDomain();
 				CompraDomain compra = new CompraDomain();
-
+				ProdutoDAO produtoDao = new ProdutoDAO();
+				
 				compra = (CompraDomain) comboCompra.getSelectedItem();
 				compraProduto.setCompraId(compra.getId());
 				produto = (ProdutoDomain) comboProdutos.getSelectedItem();
@@ -146,12 +148,13 @@ public class TelaFinalizarCompraView extends JFrame {
 				try {
 					if (codigoField.getText().equals("")) {
 						new CompraProdutoService().inserirCompraProduto(compraProduto);
+						produto.decrementaQuantidade(produto, Integer.parseInt(quantidadeField.getText()));
+						produtoDao.alterarProduto(produto);
 					} else {
 						compraProduto.setId(Integer.parseInt(codigoField.getText()));
 						new CompraProdutoService().alterarCompraProduto(compraProduto);
 					}
 				} catch (NegocioException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -164,7 +167,6 @@ public class TelaFinalizarCompraView extends JFrame {
 				TelaListagemCompraView telaListagemCompra = new TelaListagemCompraView();
 				telaListagemCompra.setVisible(true);
 				dispose();
-						
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));

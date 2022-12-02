@@ -21,15 +21,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+import sistema_faturamento_comercial.dao.ProdutoDAO;
 import sistema_faturamento_comercial.domain.ClienteDomain;
 import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.EnderecoDomain;
-import sistema_faturamento_comercial.domain.FuncionarioDomain;
 import sistema_faturamento_comercial.domain.ProdutoDomain;
 import sistema_faturamento_comercial.service.ClienteService;
 import sistema_faturamento_comercial.service.CompraService;
 import sistema_faturamento_comercial.service.EnderecoService;
-import sistema_faturamento_comercial.service.FuncionarioService;
 import sistema_faturamento_comercial.util.NegocioException;
 
 public class TelaCadastroCompraView extends JFrame {
@@ -136,7 +135,9 @@ public class TelaCadastroCompraView extends JFrame {
 				CompraDomain compra = new CompraDomain();
 				ClienteDomain cliente = new ClienteDomain();
 				EnderecoDomain endereco = new EnderecoDomain();
-	
+				ProdutoDomain produto = new ProdutoDomain();
+				ProdutoDAO produtoDao = new ProdutoDAO();
+				
 				compra.setDataCompra(LocalDate.now());
 				compra.setFormaPagamento(formaPagamentoField.getText());
 				endereco = (EnderecoDomain) comboEndereco.getSelectedItem();
@@ -168,6 +169,9 @@ public class TelaCadastroCompraView extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TelaListagemCompraView telaListagemCompra = new TelaListagemCompraView();
+				telaListagemCompra.setVisible(true);
+				dispose();
 			}
 		});
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 20));

@@ -90,6 +90,13 @@ public class TelaListagemEnderecoView extends JFrame {
 		});
 		
 		JButton btnNewButton_3 = new JButton("Voltar");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuView telaMenu = new TelaMenuView();
+				telaMenu.setVisible(true);
+				dispose();
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

@@ -20,7 +20,7 @@ import sistema_faturamento_comercial.domain.MarcaDomain;
 import sistema_faturamento_comercial.service.MarcaService;
 import sistema_faturamento_comercial.util.NegocioException;
 
-public class TelaMarcaView extends JFrame {
+public class TelaCadastroMarcaView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField codigoCampo;
@@ -33,7 +33,7 @@ public class TelaMarcaView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaMarcaView frame = new TelaMarcaView();
+					TelaCadastroMarcaView frame = new TelaCadastroMarcaView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class TelaMarcaView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaMarcaView() {
+	public TelaCadastroMarcaView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -67,6 +67,7 @@ public class TelaMarcaView extends JFrame {
 		nomeCampo.setColumns(10);
 		
 		JButton cadastrarButton = new JButton("Cadastrar");
+		cadastrarButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cadastrarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MarcaDomain marca = new MarcaDomain();
@@ -88,6 +89,7 @@ public class TelaMarcaView extends JFrame {
 		});
 		
 		JButton sairButton = new JButton("Sair");
+		sairButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaListagemMarcaView telaListagem = new TelaListagemMarcaView();

@@ -61,7 +61,7 @@ public class TelaListagemMarcaView extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				TelaMarcaView telaCadastro = new TelaMarcaView();
+				TelaCadastroMarcaView telaCadastro = new TelaCadastroMarcaView();
 				telaCadastro.setVisible(true);
 				dispose();
 
@@ -72,7 +72,7 @@ public class TelaListagemMarcaView extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MarcaDomain marcaSelecionada = marcas.get(table.getSelectedRow());
-                TelaMarcaView telaCadastroMarca = new TelaMarcaView();
+                TelaCadastroMarcaView telaCadastroMarca = new TelaCadastroMarcaView();
                 telaCadastroMarca.carregarMarcaPorId(marcaSelecionada.getId());
                 telaCadastroMarca.setVisible(true);
                 dispose();
@@ -96,6 +96,13 @@ public class TelaListagemMarcaView extends JFrame {
 		});
 
 		JButton btnNewButton_3 = new JButton("Voltar");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaMenuView telaMenu = new TelaMenuView();
+				telaMenu.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		JButton btnNewButton_4 = new JButton("Sair");
