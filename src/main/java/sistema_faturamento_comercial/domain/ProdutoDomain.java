@@ -10,7 +10,7 @@ public class ProdutoDomain {
 	private String nome;
 	private String descricao;
 	private BigDecimal preco;
-	private Integer quantidade;
+	private Integer quantidade = 0;
 	private Integer marcaId;
 	private Integer categoriaId;
 

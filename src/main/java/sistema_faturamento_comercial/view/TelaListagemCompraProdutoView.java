@@ -1,34 +1,31 @@
 package sistema_faturamento_comercial.view;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import sistema_faturamento_comercial.domain.CompraDomain;
+import sistema_faturamento_comercial.dao.ProdutoDAO;
 import sistema_faturamento_comercial.domain.CompraProdutoDomain;
-import sistema_faturamento_comercial.domain.FuncionarioDomain;
 import sistema_faturamento_comercial.domain.ProdutoDomain;
 import sistema_faturamento_comercial.service.CompraProdutoService;
-import sistema_faturamento_comercial.service.CompraService;
-import sistema_faturamento_comercial.service.FuncionarioService;
+import sistema_faturamento_comercial.service.ProdutoService;
 import sistema_faturamento_comercial.util.NegocioException;
-
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.ListSelectionModel;
 
 public class TelaListagemCompraProdutoView extends JFrame {
 
@@ -99,11 +96,16 @@ public class TelaListagemCompraProdutoView extends JFrame {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ProdutoDomain produtoDomain = new ProdutoDomain();
+				ProdutoDAO produtoDao = new ProdutoDAO();
 				CompraProdutoDomain compraProdutoSelecionada = compraProdutos.get(table.getSelectedRow());
+	
+				
                 if (JOptionPane.showConfirmDialog(null, "Deseja excluir a compra?") == JOptionPane.OK_OPTION) {
                     try {
                         new CompraProdutoService().excluirCompraProduto(compraProdutoSelecionada.getId());
-//                        produtoDomain.acrescentaQuantidade(compraProdutoSelecionada.getQuantidade());
+                        produtoDomain = new ProdutoService().buscarProdutoPorId(compraProdutoSelecionada.getProdutoId());
+                        produtoDomain.acrescentaQuantidade(produtoDomain, compraProdutoSelecionada.getQuantidade());
+                        produtoDao.alterarProduto(produtoDomain);
                         popularTabela();
                     } catch (NegocioException e1) {
                         JOptionPane.showMessageDialog(null, e1.getMessage());
