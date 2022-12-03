@@ -16,22 +16,21 @@ import sistema_faturamento_comercial.util.NegocioException;
 
 public class CompraDAO {
 
-	
 	private String sqlInsert = "INSERT INTO compra(data, forma_pagamento, endereco_id, cliente_id) VALUES(?, ?, ?, ?)";
 
 	public void inserirCompra(CompraDomain compra) {
 		try {
-			Connection connection = ConfigConexao.getConexao(); 
-			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert); 
+			Connection connection = ConfigConexao.getConexao();
+			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
 
 			preparedStatement.setDate(1, Date.valueOf(compra.getDataCompra()));
 			preparedStatement.setString(2, compra.getFormaPagamento());
 			preparedStatement.setInt(3, compra.getEnderecoId());
 			preparedStatement.setInt(4, compra.getClienteId());
-			preparedStatement.execute(); 
+			preparedStatement.execute();
 
 		} catch (Exception e) {
-			System.err.print(e.getMessage()); 
+			System.err.print(e.getMessage());
 		}
 	}
 
@@ -46,20 +45,21 @@ public class CompraDAO {
 			ps.setLong(1, id);
 
 			ps.execute();
-			
+
 			JOptionPane.showMessageDialog(null, "Compra excluída com sucesso");
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro: A compra " + id + " não pode ser excluída com itens ainda vinculados");
+			JOptionPane.showMessageDialog(null,
+					"Erro: A compra " + id + " não pode ser excluída com itens ainda vinculados");
 //			e.printStackTrace();
 		} finally {
 			try {
 				ps.close();
 			} catch (SQLException e) {
-//				e.printStackTrace();
-				
+				e.printStackTrace();
+
 			}
 		}
-		
+
 	}
 
 	public List<CompraDomain> listarCompras() {
@@ -76,7 +76,7 @@ public class CompraDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				CompraDomain compra = new CompraDomain(rs.getInt("id"), rs.getDate("data").toLocalDate(), 
+				CompraDomain compra = new CompraDomain(rs.getInt("id"), rs.getDate("data").toLocalDate(),
 						rs.getString("forma_pagamento"), rs.getInt("endereco_id"), rs.getInt("cliente_id"));
 				resultado.add(compra);
 			}
@@ -96,7 +96,7 @@ public class CompraDAO {
 
 	public void alterarCompra(CompraDomain compra) {
 
-		String sql = "UPDATE categoria SET data = ?, forma_pagamento = ?, endereco_id, cliente_id WHERE id = ?";
+		String sql = "UPDATE compra SET data = ?, forma_pagamento = ?, endereco_id = ?, cliente_id = ?  WHERE id = ?";
 
 		PreparedStatement ps = null;
 
@@ -109,9 +109,6 @@ public class CompraDAO {
 			ps.setInt(4, compra.getClienteId());
 			ps.setInt(5, compra.getId());
 			ps.execute();
-			
-			ps.execute();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -143,10 +140,10 @@ public class CompraDAO {
 			if (rs.next()) {
 				compraEncontrada = new CompraDomain();
 				compraEncontrada.setId(rs.getInt("id"));
+				compraEncontrada.setDataCompra(rs.getDate("data").toLocalDate());
 				compraEncontrada.setFormaPagamento(rs.getString("forma_pagamento"));
 				compraEncontrada.setEnderecoId(rs.getInt("endereco_id"));
 				compraEncontrada.setClienteId(rs.getInt("cliente_id"));
-				
 			}
 
 			return compraEncontrada;

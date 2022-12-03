@@ -6,7 +6,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,11 +25,15 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
 import sistema_faturamento_comercial.dao.ProdutoDAO;
+import sistema_faturamento_comercial.domain.ClienteDomain;
 import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.domain.CompraProdutoDomain;
+import sistema_faturamento_comercial.domain.EnderecoDomain;
 import sistema_faturamento_comercial.domain.ProdutoDomain;
+import sistema_faturamento_comercial.service.ClienteService;
 import sistema_faturamento_comercial.service.CompraProdutoService;
 import sistema_faturamento_comercial.service.CompraService;
+import sistema_faturamento_comercial.service.EnderecoService;
 import sistema_faturamento_comercial.service.ProdutoService;
 import sistema_faturamento_comercial.util.NegocioException;
 
@@ -39,7 +45,9 @@ public class TelaFinalizarCompraView extends JFrame {
 	List<ProdutoDomain> produtos;
 	private JTextField totalField;
 	private JTextField codigoField;
-
+	final JComboBox comboProdutos = new JComboBox();
+	final JComboBox comboCompra = new JComboBox();
+	NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 	/**
 	 * Launch the application.
 	 */
@@ -67,13 +75,9 @@ public class TelaFinalizarCompraView extends JFrame {
 
 		setContentPane(contentPane);
 
-		JLabel lblNewLabel = new JLabel("ÁREA DA COMPRA");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-
 		JLabel lblNewLabel_1 = new JLabel("Número da compra:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		final JComboBox comboCompra = new JComboBox();
 		comboCompra.addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
 				CompraService compraService = new CompraService();
@@ -100,22 +104,21 @@ public class TelaFinalizarCompraView extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("Produto: ");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-		final JComboBox comboProdutos = new JComboBox();
 		comboProdutos.addAncestorListener(new AncestorListener() {
 			public void ancestorAdded(AncestorEvent event) {
-				ProdutoService produtoService = new ProdutoService();
-				try {
-					produtos = produtoService.listarProdutos();
-					comboCompra.removeAll();
-					for (ProdutoDomain produto : produtos) {
-						comboProdutos.addItem(produto);
-					}
-				} catch (NegocioException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 
-			}
+					ProdutoService produtoService = new ProdutoService();
+					try {
+						produtos = produtoService.listarProdutos();
+						comboCompra.removeAll();
+						for (ProdutoDomain produto : produtos) {
+							comboProdutos.addItem(produto);
+						}
+					} catch (NegocioException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 
 			public void ancestorMoved(AncestorEvent event) {
 			}
@@ -137,19 +140,36 @@ public class TelaFinalizarCompraView extends JFrame {
 				ProdutoDomain produto = new ProdutoDomain();
 				CompraDomain compra = new CompraDomain();
 				ProdutoDAO produtoDao = new ProdutoDAO();
+				ClienteDomain cliente = new ClienteDomain();
+				EnderecoDomain endereco = new EnderecoDomain();
+				
+				
 				
 				compra = (CompraDomain) comboCompra.getSelectedItem();
 				compraProduto.setCompraId(compra.getId());
 				produto = (ProdutoDomain) comboProdutos.getSelectedItem();
 				compraProduto.setProdutoId(produto.getId());
 				compraProduto.setQuantidade(Integer.parseInt(quantidadeField.getText()));
-				compraProduto.setTotal(compraProduto.retornaTotal(produto, Integer.parseInt(quantidadeField.getText())));
-				
+				compraProduto
+						.setTotal(compraProduto.retornaTotal(produto, Integer.parseInt(quantidadeField.getText())));
+
 				try {
 					if (codigoField.getText().equals("")) {
+						new ProdutoService().decrementaQuantidade(produto, Integer.parseInt(quantidadeField.getText()));
 						new CompraProdutoService().inserirCompraProduto(compraProduto);
-						produto.decrementaQuantidade(produto, Integer.parseInt(quantidadeField.getText()));
 						produtoDao.alterarProduto(produto);
+						compra = new CompraService().buscarCompraPorId(compra.getId());
+						cliente = new ClienteService().buscarClientePorId(compra.getClienteId());
+						endereco = new EnderecoService().buscarEnderecoPorId(compra.getEnderecoId());
+					
+							JOptionPane.showMessageDialog(null, "Dados da compra: " + "\n" + "Código: " + compra.getId()
+									+ "\n" + "Cliente: " + cliente.getNome() + "\n" + "Endereço: " + endereco
+									+ "\n" + "Forma Pagamento: " + compra.getFormaPagamento() + "\n" + "Data: "
+									+ compra.getDataCompra() + "\n" + "Produtos: " + produto.getNome() + "\n" + "Quantidade: "
+									+ compraProduto.getQuantidade() + "\n" + "Total: " + formatter.format(compraProduto.getTotal()));
+
+							limparCampos();
+
 					} else {
 						compraProduto.setId(Integer.parseInt(codigoField.getText()));
 						new CompraProdutoService().alterarCompraProduto(compraProduto);
@@ -191,20 +211,25 @@ public class TelaFinalizarCompraView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CompraProdutoDomain compraProduto = new CompraProdutoDomain();
 				ProdutoDomain produto = new ProdutoDomain();
-				
+
 				produto = (ProdutoDomain) comboProdutos.getSelectedItem();
 				compraProduto.setProdutoId(produto.getId());
-				BigDecimal valorCalculado = compraProduto.retornaTotal(produto, Integer.parseInt(quantidadeField.getText()));
-				totalField.setText(valorCalculado.toString());
+				BigDecimal valorCalculado = compraProduto.retornaTotal(produto,
+						Integer.parseInt(quantidadeField.getText()));
+				totalField.setText(formatter.format(valorCalculado).toString());
 			}
 		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JLabel lblNewLabel_4_1 = new JLabel("CADASTRO DE COMPRA");
+		lblNewLabel_4_1.setForeground(Color.BLACK);
+		lblNewLabel_4_1.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
@@ -237,54 +262,69 @@ public class TelaFinalizarCompraView extends JFrame {
 											.addGap(4)
 											.addComponent(quantidadeField, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))))
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
-							.addGap(290))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+							.addGap(256))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(18)
-					.addComponent(lblNewLabel)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(52)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(101)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(comboCompra, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNewLabel_5)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(102)
+									.addComponent(codigoField)))
+							.addGap(28)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboCompra, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_5)))
+								.addComponent(comboProdutos, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_3)
+								.addComponent(quantidadeField, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(totalField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+								.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+							.addGap(56)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(53)
-							.addComponent(codigoField)))
-					.addGap(28)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboProdutos, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_3)
-						.addComponent(quantidadeField, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(totalField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-						.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(56)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+							.addGap(20)
+							.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 
-	public void carregarCompraProdutoPorId(Integer id) {
+	private void limparCampos() {
+	codigoField.setText("");
+	quantidadeField.setText("");
+    comboProdutos.getModel().setSelectedItem("");
+    comboCompra.getModel().setSelectedItem("");
+	totalField.setText("");
+	}
+	
+	public void carregarCompraProdutoPorId(Integer id, Integer produtoId, Integer compraId) {
 		try {
 			CompraProdutoDomain compraProdutoEncontrado = new CompraProdutoService().buscarCompraProdutoPorId(id);
+			ProdutoDomain produto = new ProdutoService().buscarProdutoPorId(produtoId);
+			CompraDomain compra = new CompraService().buscarCompraPorId(compraId);
 
 			if (compraProdutoEncontrado == null) {
 				JOptionPane.showMessageDialog(null, "Detalhes da compra não foram localizados", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
+				comboProdutos.getModel().setSelectedItem(produto);
+				comboCompra.getModel().setSelectedItem(compra.getId());
 				codigoField.setText(Integer.toString(compraProdutoEncontrado.getId()));
 				quantidadeField.setText(Integer.toString(compraProdutoEncontrado.getQuantidade()));
 

@@ -1,7 +1,6 @@
 package sistema_faturamento_comercial.domain;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class CompraDomain {
 
@@ -10,12 +9,13 @@ public class CompraDomain {
 	private Integer enderecoId;
 	private LocalDate dataCompra;
 	private String formaPagamento;
-	
+
 	public CompraDomain() {
 
 	}
-	
-	public CompraDomain(Integer id, LocalDate dataCompra, String formaPagamento, Integer clienteId, Integer enderecoId) {
+
+	public CompraDomain(Integer id, LocalDate dataCompra, String formaPagamento, Integer clienteId,
+			Integer enderecoId) {
 		this.id = id;
 		this.clienteId = clienteId;
 		this.enderecoId = enderecoId;
@@ -65,10 +65,7 @@ public class CompraDomain {
 
 	@Override
 	public String toString() {
-		return this.getId() + " - "+ this.dataCompra;
+		return this.id + " " + this.dataCompra;
 	}
-	
-	
-	
-	
+
 }

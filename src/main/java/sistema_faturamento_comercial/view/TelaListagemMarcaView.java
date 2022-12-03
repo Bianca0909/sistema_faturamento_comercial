@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import sistema_faturamento_comercial.domain.MarcaDomain;
 import sistema_faturamento_comercial.service.MarcaService;
 import javax.swing.ListSelectionModel;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class TelaListagemMarcaView extends JFrame {
 
@@ -112,35 +114,51 @@ public class TelaListagemMarcaView extends JFrame {
 			}
 		});
 		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JLabel lblNewLabel_4 = new JLabel("LISTAGEM DE MARCAS");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup().addComponent(btnNewButton_3)
-								.addPreferredGap(ComponentPlacement.RELATED, 437, Short.MAX_VALUE)
-								.addComponent(btnNewButton_4))
-						.addGroup(Alignment.TRAILING,
-								gl_contentPane.createSequentialGroup().addComponent(btnNewButton_2)
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnNewButton_1)
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnNewButton))
-						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE))
-				.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addGap(54)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnNewButton_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-						.addContainerGap()));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnNewButton_3)
+									.addPreferredGap(ComponentPlacement.RELATED, 487, Short.MAX_VALUE)
+									.addComponent(btnNewButton_4))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnNewButton_2)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton_1)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton))
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE))
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+							.addGap(170))))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(20)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnNewButton_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import javax.swing.JOptionPane;
 
+import sistema_faturamento_comercial.util.NegocioException;
+
 public class ProdutoDomain {
 
 	private Integer id;
@@ -88,25 +90,7 @@ public class ProdutoDomain {
 
 	@Override
 	public String toString() {
-		return this.getNome() + "- R$" + this.getPreco() + "Qtde:  " + " " + this.getQuantidade();
+		return this.getNome() + "- R$" + this.getPreco() + " - Qtde:  " + " " + this.getQuantidade();
 	}
 
-	public void decrementaQuantidade(ProdutoDomain produto, Integer quantidadeVendida) {
-		Integer quantidadeAtual;
-
-		if (quantidadeVendida <= produto.getQuantidade()) {
-			quantidadeAtual = produto.getQuantidade() - quantidadeVendida;
-			produto.setQuantidade(quantidadeAtual);
-		} else {
-			JOptionPane.showMessageDialog(null, "A quantidade vendida não pode ser maior que a quantidade em estoque");
-		}
-	}
-
-	public void acrescentaQuantidade(ProdutoDomain produto, Integer quantidadeVendida) {
-		Integer quantidadeAtual;
-
-		quantidadeAtual = produto.getQuantidade() + quantidadeVendida;
-		produto.setQuantidade(quantidadeAtual);
-
-	}
 }

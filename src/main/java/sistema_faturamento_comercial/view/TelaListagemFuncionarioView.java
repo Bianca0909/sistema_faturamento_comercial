@@ -20,7 +20,8 @@ import javax.swing.table.DefaultTableModel;
 
 import sistema_faturamento_comercial.domain.FuncionarioDomain;
 import sistema_faturamento_comercial.service.FuncionarioService;
-import sistema_faturamento_comercial.service.MarcaService;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class TelaListagemFuncionarioView extends JFrame {
 
@@ -72,7 +73,7 @@ public class TelaListagemFuncionarioView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				FuncionarioDomain funcionarioSelecionado = funcionarios.get(table.getSelectedRow());
                 TelaCadastroFuncionarioView telaCadastroFuncionario = new TelaCadastroFuncionarioView();
-                telaCadastroFuncionario.carregarFuncionarioPorId(funcionarioSelecionado.getId());
+                telaCadastroFuncionario.carregarFuncionarioPorId(funcionarioSelecionado.getId(), funcionarioSelecionado.getEndereco());
                 telaCadastroFuncionario.setVisible(true);
                 dispose();
 				
@@ -114,29 +115,40 @@ public class TelaListagemFuncionarioView extends JFrame {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JLabel lblNewLabel_4 = new JLabel("LISTAGEM DE FUNCIONÁRIOS");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 647, Short.MAX_VALUE)
-							.addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(adicionarButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE))
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 647, Short.MAX_VALUE)
+									.addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(adicionarButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(286)
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 340, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(103)
+					.addGap(22)
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(47)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnEditar, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
