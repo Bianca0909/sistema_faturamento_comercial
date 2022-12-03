@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 import java.awt.Font;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class TelaListagemProdutoView extends JFrame {
 
@@ -70,9 +72,9 @@ public class TelaListagemProdutoView extends JFrame {
 		JButton editarButton = new JButton("Editar");
 		editarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProdutoDomain ProdutoSelecionado = Produtos.get(table.getSelectedRow());
+				ProdutoDomain produtoSelecionado = Produtos.get(table.getSelectedRow());
 				TelaCadastroProdutoView telaCadastro = new TelaCadastroProdutoView();
-				telaCadastro.carregarProdutoPorId(ProdutoSelecionado.getId());
+				telaCadastro.carregarProdutoPorId(produtoSelecionado.getId(), produtoSelecionado.getCategoriaId(), produtoSelecionado.getMarcaId());
 				telaCadastro.setVisible(true);
 				dispose();
 			}
@@ -114,9 +116,13 @@ public class TelaListagemProdutoView extends JFrame {
 			}
 		});
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		
+		JLabel lblNewLabel_4 = new JLabel("LISTAGEM DE PRODUTOS");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(612)
 					.addComponent(excluirButton)
@@ -134,11 +140,17 @@ public class TelaListagemProdutoView extends JFrame {
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 808, GroupLayout.PREFERRED_SIZE))
 					.addGap(40))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(325, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+					.addGap(299))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(93)
+					.addGap(27)
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(32)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(excluirButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 						.addComponent(editarButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)

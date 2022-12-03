@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import sistema_faturamento_comercial.domain.MarcaDomain;
 import sistema_faturamento_comercial.service.MarcaService;
 import sistema_faturamento_comercial.util.NegocioException;
+import java.awt.Color;
 
 public class TelaCadastroMarcaView extends JFrame {
 
@@ -97,45 +98,56 @@ public class TelaCadastroMarcaView extends JFrame {
 				dispose();
 			}
 		});
+		
+		JLabel lblNewLabel_4 = new JLabel("CADASTRO DE MARCAS");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(61)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(codigoId)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(codigoCampo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(cadastrarButton)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(sairButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-								.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(nomeCampo, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE))))
-					.addGap(59))
+							.addGap(61)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(codigoId)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(codigoCampo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(nomeCampo, GroupLayout.PREFERRED_SIZE, 247, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(sairButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+											.addComponent(cadastrarButton))))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap(93, Short.MAX_VALUE)
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(61, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(65)
+					.addContainerGap()
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(33)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(codigoId)
-						.addComponent(codigoCampo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(1)
-							.addComponent(nomeCampo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(sairButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cadastrarButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
-					.addGap(34))
+						.addComponent(codigoCampo, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+					.addGap(19)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(nomeCampo, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+						.addComponent(nomeLabel, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(cadastrarButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(sairButton, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+					.addGap(23))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

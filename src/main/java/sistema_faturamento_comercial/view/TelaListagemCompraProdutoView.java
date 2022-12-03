@@ -26,18 +26,19 @@ import sistema_faturamento_comercial.domain.ProdutoDomain;
 import sistema_faturamento_comercial.service.CompraProdutoService;
 import sistema_faturamento_comercial.service.ProdutoService;
 import sistema_faturamento_comercial.util.NegocioException;
+import java.awt.Color;
 
 public class TelaListagemCompraProdutoView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private List<CompraProdutoDomain> compraProdutos;
-	private JLabel lblNewLabel;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private JButton btnNewButton_3;
 	private JButton btnNewButton_4;
+	private JLabel lblNewLabel;
 	/**
 	 * Launch the application.
 	 */
@@ -67,9 +68,6 @@ public class TelaListagemCompraProdutoView extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		lblNewLabel = new JLabel("Detalhes da compra");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		
 		btnNewButton = new JButton("Adicionar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,7 +83,14 @@ public class TelaListagemCompraProdutoView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CompraProdutoDomain compraProdutoSelecionada = compraProdutos.get(table.getSelectedRow());
 				TelaFinalizarCompraView telaFinalizacaoCompra = new TelaFinalizarCompraView();
-				telaFinalizacaoCompra.carregarCompraProdutoPorId(compraProdutoSelecionada.getId());
+				ProdutoDomain produto;
+				try {
+					produto = new ProdutoService().buscarProdutoPorId(compraProdutoSelecionada.getProdutoId());
+				} catch (NegocioException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				telaFinalizacaoCompra.carregarCompraProdutoPorId(compraProdutoSelecionada.getId(), compraProdutoSelecionada.getProdutoId(), compraProdutoSelecionada.getCompraId());
 				telaFinalizacaoCompra.setVisible(true);
 				dispose();
 			}
@@ -104,7 +109,7 @@ public class TelaListagemCompraProdutoView extends JFrame {
                     try {
                         new CompraProdutoService().excluirCompraProduto(compraProdutoSelecionada.getId());
                         produtoDomain = new ProdutoService().buscarProdutoPorId(compraProdutoSelecionada.getProdutoId());
-                        produtoDomain.acrescentaQuantidade(produtoDomain, compraProdutoSelecionada.getQuantidade());
+                        new ProdutoService().acrescentaQuantidade(produtoDomain, compraProdutoSelecionada.getQuantidade());
                         produtoDao.alterarProduto(produtoDomain);
                         popularTabela();
                     } catch (NegocioException e1) {
@@ -132,16 +137,17 @@ public class TelaListagemCompraProdutoView extends JFrame {
 			}
 		});
 		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		lblNewLabel = new JLabel("DETALHES DA COMPRA");
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(291)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 231, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap(507, Short.MAX_VALUE)
+							.addContainerGap(508, Short.MAX_VALUE)
 							.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
@@ -153,16 +159,20 @@ public class TelaListagemCompraProdutoView extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 616, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 617, Short.MAX_VALUE)
 							.addComponent(btnNewButton_4, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(282, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+					.addGap(258))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(20)
-					.addComponent(lblNewLabel)
-					.addGap(25)
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(32)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
 						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)

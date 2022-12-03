@@ -21,6 +21,9 @@ import sistema_faturamento_comercial.util.NegocioException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
 
 public class TelaListagemEnderecoView extends JFrame {
 	private JTable table;
@@ -97,26 +100,37 @@ public class TelaListagemEnderecoView extends JFrame {
 				dispose();
 			}
 		});
+		
+		JLabel lblNewLabel_4 = new JLabel("LISTAGEM DE ENDEREÇOS");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(24)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnNewButton_2)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 729, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_3, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+							.addGap(24)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnNewButton_2)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton))
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 729, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnNewButton_3, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(227)
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 314, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(92, Short.MAX_VALUE)
+					.addGap(21)
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)

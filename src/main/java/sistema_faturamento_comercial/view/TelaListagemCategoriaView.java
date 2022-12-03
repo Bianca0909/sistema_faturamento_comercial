@@ -23,6 +23,8 @@ import sistema_faturamento_comercial.service.MarcaService;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class TelaListagemCategoriaView extends JFrame {
 
@@ -109,29 +111,39 @@ public class TelaListagemCategoriaView extends JFrame {
                 }
             }
 		});
+		
+		JLabel lblNewLabel_4 = new JLabel("LISTAGEM DE CATEGORIAS");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
 							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(184)
 							.addComponent(btnNewButton_1_2_1_1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton_1_2_1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1_2, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnNewButton_1_2, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+							.addGap(197)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(87, Short.MAX_VALUE)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnNewButton_1_2, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton_1_2_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)

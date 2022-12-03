@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import sistema_faturamento_comercial.domain.CategoriaDomain;
 import sistema_faturamento_comercial.service.CategoriaService;
 import sistema_faturamento_comercial.util.NegocioException;
+import java.awt.Color;
 
 public class TelaCadastroCategoriaView extends JFrame {
 
@@ -98,31 +99,42 @@ public class TelaCadastroCategoriaView extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JLabel lblNewLabel_4 = new JLabel("CADASTRO DE CATEGORIA");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(41)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(lblNewLabel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(41)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(lblNewLabel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(18)
+									.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addComponent(codigoField, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+									.addComponent(nomeField, GroupLayout.PREFERRED_SIZE, 394, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(18)
-							.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addComponent(codigoField, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-							.addComponent(nomeField, GroupLayout.PREFERRED_SIZE, 394, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+							.addGap(105)
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(89)
+					.addGap(19)
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(48)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel)
 						.addComponent(codigoField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
@@ -130,7 +142,7 @@ public class TelaCadastroCategoriaView extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_1)
 						.addComponent(nomeField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))

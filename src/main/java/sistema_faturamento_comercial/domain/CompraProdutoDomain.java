@@ -69,5 +69,4 @@ public class CompraProdutoDomain {
 		return total;
 		
 	}
-
 }

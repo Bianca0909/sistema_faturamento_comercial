@@ -96,11 +96,12 @@ public class FuncionarioDAO {
 			ps = ConfigConexao.getConexao().prepareStatement(sql);
 
 			ps.setString(1, funcionario.getNome());
-			ps.setString(2, funcionario.getDocumento());
-			ps.setString(3, funcionario.getPis());
+			ps.setString(2, funcionario.getPis());
+			ps.setString(3, funcionario.getDocumento());
 			ps.setBigDecimal(4, funcionario.getSalario());
-			ps.setString(4, funcionario.getFuncao());
-			ps.setInt(5, funcionario.getEndereco());
+			ps.setString(5, funcionario.getFuncao());
+			ps.setInt(6, funcionario.getEndereco());
+			ps.setInt(7, funcionario.getId());
 			ps.execute();
 
 			ps.execute();

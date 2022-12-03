@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 
 import sistema_faturamento_comercial.domain.CompraDomain;
 import sistema_faturamento_comercial.service.CompraService;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class TelaListagemCompraView extends JFrame {
 
@@ -72,7 +74,7 @@ public class TelaListagemCompraView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CompraDomain compraSelecionada = compras.get(table.getSelectedRow());
 				TelaCadastroCompraView telaCadastroCompra = new TelaCadastroCompraView();
-				telaCadastroCompra.carregarCompraPorId(compraSelecionada.getId());
+				telaCadastroCompra.carregarCompraPorId(compraSelecionada.getId(), compraSelecionada.getEnderecoId(), compraSelecionada.getClienteId());
 				telaCadastroCompra.setVisible(true);
 				dispose();
 				
@@ -123,31 +125,42 @@ public class TelaListagemCompraView extends JFrame {
 			}
 		});
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JLabel lblNewLabel_4 = new JLabel("LISTAGEM DE COMPRAS");
+		lblNewLabel_4.setForeground(Color.BLACK);
+		lblNewLabel_4.setFont(new Font("Yu Gothic UI Light", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 667, Short.MAX_VALUE)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(detalhesButton)
-							.addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
-							.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnEditar)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton))
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE))
-					.addContainerGap())
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 667, Short.MAX_VALUE)
+									.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(detalhesButton)
+									.addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
+									.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnEditar)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton))
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE))
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE)
+							.addGap(282))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(80, Short.MAX_VALUE)
+					.addContainerGap()
+					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(btnExcluir, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
@@ -169,7 +182,7 @@ public class TelaListagemCompraView extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"C\u00F3digo", "Data", "Forma de pagamento", "C\u00F3digo endere\u00E7o", "C\u00F3digo cliente"
+				"C\u00F3digo", "Data", "Forma de pagamento", "C\u00F3digo cliente", "C\u00F3digo endere\u00E7o"
 			}
 		));
 		scrollPane.setViewportView(table);

@@ -17,7 +17,7 @@ public class ClienteDAO {
 	public String inserirCliente(ClienteDomain cliente) throws NegocioException {
 
 		String sqlInsert = "INSERT INTO cliente(nome, email, documento, data_nascimento) VALUES(?, ?, ?, ?)";
-		
+
 		try {
 			Connection connection = ConfigConexao.getConexao();
 			PreparedStatement preparedStatement = connection.prepareStatement(sqlInsert);
@@ -99,7 +99,6 @@ public class ClienteDAO {
 			ps.setInt(5, cliente.getId());
 			ps.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
