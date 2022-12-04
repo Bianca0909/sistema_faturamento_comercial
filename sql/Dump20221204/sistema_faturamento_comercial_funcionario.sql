@@ -18,26 +18,35 @@ USE `sistema_faturamento_comercial`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `categoria`
+-- Table structure for table `funcionario`
 --
 
-DROP TABLE IF EXISTS `categoria`;
+DROP TABLE IF EXISTS `funcionario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `categoria` (
+CREATE TABLE `funcionario` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `nome` varchar(250) NOT NULL,
+  `pis` varchar(150) NOT NULL,
+  `documento` varchar(14) NOT NULL,
+  `salario` float(8,2) NOT NULL,
+  `funcao` varchar(50) NOT NULL,
+  `endereco_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `documento` (`documento`),
+  KEY `FK_EnderecoId` (`endereco_id`),
+  CONSTRAINT `FK_EnderecoId` FOREIGN KEY (`endereco_id`) REFERENCES `endereco` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `categoria`
+-- Dumping data for table `funcionario`
 --
 
-LOCK TABLES `categoria` WRITE;
-/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+LOCK TABLES `funcionario` WRITE;
+/*!40000 ALTER TABLE `funcionario` DISABLE KEYS */;
+INSERT INTO `funcionario` VALUES (11,'Joana','524.55934.64-1','766.544.300-18',2000.00,'Auxiliar de escritório',3),(12,'João','4445557778','11122233355',1500.00,'Vendedor externo',3);
+/*!40000 ALTER TABLE `funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-27 10:44:34
+-- Dump completed on 2022-12-04 15:18:25

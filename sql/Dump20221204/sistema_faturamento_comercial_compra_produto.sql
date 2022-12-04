@@ -18,34 +18,34 @@ USE `sistema_faturamento_comercial`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `funcionario`
+-- Table structure for table `compra_produto`
 --
 
-DROP TABLE IF EXISTS `funcionario`;
+DROP TABLE IF EXISTS `compra_produto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `funcionario` (
+CREATE TABLE `compra_produto` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(250) NOT NULL,
-  `pis` varchar(150) NOT NULL,
-  `documento` varchar(14) NOT NULL,
-  `salario` float(8,2) NOT NULL,
-  `funcao` varchar(50) NOT NULL,
-  `endereco_id` int NOT NULL,
+  `compra_id` int NOT NULL,
+  `produto_id` int NOT NULL,
+  `quantidade` int NOT NULL,
+  `total` mediumtext,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `documento` (`documento`),
-  KEY `FK_EnderecoId` (`endereco_id`),
-  CONSTRAINT `FK_EnderecoId` FOREIGN KEY (`endereco_id`) REFERENCES `endereco` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_CompraId` (`compra_id`),
+  KEY `FK_ProdutoId` (`produto_id`),
+  CONSTRAINT `FK_CompraId` FOREIGN KEY (`compra_id`) REFERENCES `compra` (`id`),
+  CONSTRAINT `FK_ProdutoId` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `funcionario`
+-- Dumping data for table `compra_produto`
 --
 
-LOCK TABLES `funcionario` WRITE;
-/*!40000 ALTER TABLE `funcionario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `funcionario` ENABLE KEYS */;
+LOCK TABLES `compra_produto` WRITE;
+/*!40000 ALTER TABLE `compra_produto` DISABLE KEYS */;
+INSERT INTO `compra_produto` VALUES (31,4,2,5,'6000.0'),(32,4,2,5,'6000.0'),(33,4,2,1,'1200.0'),(34,4,2,1,'1200.0'),(35,5,2,1,'1200.0'),(36,4,2,1,'1200.0'),(37,4,2,1,'1200.0'),(38,4,2,1,'1200.0'),(39,4,2,1,'1200.0'),(40,4,2,1,'1200.0'),(41,4,2,1,'1200.0'),(42,4,2,1,'1200.0'),(43,4,2,2,'2400.0'),(44,4,3,2,'3600.0'),(45,4,3,1,'1800.0'),(46,4,3,1,'1800.0'),(47,13,3,1,'1800.0'),(48,12,3,4,'7200.0'),(49,4,3,1,'1800.0'),(50,13,3,1,'1800.0'),(51,13,3,1,'1800.0'),(52,12,3,1,'1800.0'),(53,12,3,1,'1800.0'),(54,12,3,1,'1800.0'),(55,4,2,4,'4800.0'),(56,4,2,1,'1200.0'),(57,4,2,2,'2400.0'),(58,4,2,1,'1200.0'),(59,4,3,1,'1800.0'),(60,4,2,-1,'-1200.0'),(61,13,2,1,'1200.0'),(62,8,3,1,'2000.0'),(63,4,3,1,'2000.0'),(64,4,2,1,'1200.0'),(65,4,3,1,'2000.0'),(66,4,2,2,'2400.0'),(67,4,2,1,'1200.0'),(68,4,2,1,'1200.0'),(70,4,4,1,'1000.0'),(71,15,4,1,'1000.0'),(72,16,2,5,'6000.0'),(73,4,2,5,'6000.0');
+/*!40000 ALTER TABLE `compra_produto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-27 10:44:34
+-- Dump completed on 2022-12-04 15:18:25

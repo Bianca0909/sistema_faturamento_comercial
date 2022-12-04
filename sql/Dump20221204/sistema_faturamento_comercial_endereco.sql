@@ -18,26 +18,34 @@ USE `sistema_faturamento_comercial`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `marca`
+-- Table structure for table `endereco`
 --
 
-DROP TABLE IF EXISTS `marca`;
+DROP TABLE IF EXISTS `endereco`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `marca` (
+CREATE TABLE `endereco` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) DEFAULT NULL,
+  `cep` varchar(9) NOT NULL,
+  `bairro` varchar(150) NOT NULL,
+  `estado` varchar(3) NOT NULL,
+  `cidade` varchar(250) NOT NULL,
+  `pais` varchar(250) NOT NULL,
+  `rua` varchar(250) NOT NULL,
+  `numero` int DEFAULT NULL,
+  `complemento` varchar(350) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `marca`
+-- Dumping data for table `endereco`
 --
 
-LOCK TABLES `marca` WRITE;
-/*!40000 ALTER TABLE `marca` DISABLE KEYS */;
-/*!40000 ALTER TABLE `marca` ENABLE KEYS */;
+LOCK TABLES `endereco` WRITE;
+/*!40000 ALTER TABLE `endereco` DISABLE KEYS */;
+INSERT INTO `endereco` VALUES (1,'a','a','a','a','Brasil','a',1,'a'),(2,'88701-000','São Martinho','SC','Tubarão','Brasil','SC 370',21,'Loja comercial'),(3,'88735000','Pouso Alto','SC','Gravatal','Brasil','SC 370 ',180,'Casa');
+/*!40000 ALTER TABLE `endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-27 10:44:34
+-- Dump completed on 2022-12-04 15:18:25

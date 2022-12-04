@@ -18,32 +18,34 @@ USE `sistema_faturamento_comercial`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `compra_produto`
+-- Table structure for table `compra`
 --
 
-DROP TABLE IF EXISTS `compra_produto`;
+DROP TABLE IF EXISTS `compra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `compra_produto` (
+CREATE TABLE `compra` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `compra_id` int NOT NULL,
-  `produto_id` int NOT NULL,
-  `quantidade` int NOT NULL,
+  `data` date NOT NULL,
+  `forma_pagamento` varchar(50) NOT NULL,
+  `endereco_id` int DEFAULT NULL,
+  `cliente_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_CompraId` (`compra_id`),
-  KEY `FK_ProdutoId` (`produto_id`),
-  CONSTRAINT `FK_CompraId` FOREIGN KEY (`compra_id`) REFERENCES `compra` (`id`),
-  CONSTRAINT `FK_ProdutoId` FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FK_EnderecoCompra` (`endereco_id`),
+  KEY `FK_ClienteId` (`cliente_id`),
+  CONSTRAINT `FK_ClienteId` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `FK_EnderecoCompra` FOREIGN KEY (`endereco_id`) REFERENCES `endereco` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `compra_produto`
+-- Dumping data for table `compra`
 --
 
-LOCK TABLES `compra_produto` WRITE;
-/*!40000 ALTER TABLE `compra_produto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `compra_produto` ENABLE KEYS */;
+LOCK TABLES `compra` WRITE;
+/*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+INSERT INTO `compra` VALUES (4,'2022-12-02','dn',1,1),(5,'2022-12-02','CC',2,2),(6,'2022-12-01','DN',1,1),(7,'2022-12-01','DN',1,1),(8,'2022-12-01','DN',1,1),(9,'2022-12-02','CC',3,2),(10,'2022-12-02','CC',3,2),(11,'2022-12-02','DN',1,2),(12,'2022-12-02','CD',3,1),(13,'2022-12-02','DN',3,2),(14,'2022-12-02','DN',3,2),(15,'2022-12-02','Cartão de crédito',3,2),(16,'2022-12-02','DN',3,1),(17,'2022-12-02','Dinheiro',2,3),(18,'2022-12-02','DInheiro',2,3);
+/*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-27 10:44:34
+-- Dump completed on 2022-12-04 15:18:25

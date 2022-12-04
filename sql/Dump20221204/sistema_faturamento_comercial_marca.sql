@@ -18,35 +18,27 @@ USE `sistema_faturamento_comercial`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `produto`
+-- Table structure for table `marca`
 --
 
-DROP TABLE IF EXISTS `produto`;
+DROP TABLE IF EXISTS `marca`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `produto` (
+CREATE TABLE `marca` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(250) NOT NULL,
-  `descricao` text NOT NULL,
-  `preco` float(8,2) NOT NULL,
-  `quantidade` int NOT NULL,
-  `marca_id` int NOT NULL,
-  `categoria_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_MarcaId` (`marca_id`),
-  KEY `FK_CategoriaId` (`categoria_id`),
-  CONSTRAINT `FK_CategoriaId` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`),
-  CONSTRAINT `FK_MarcaId` FOREIGN KEY (`marca_id`) REFERENCES `marca` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `nome` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `produto`
+-- Dumping data for table `marca`
 --
 
-LOCK TABLES `produto` WRITE;
-/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
+LOCK TABLES `marca` WRITE;
+/*!40000 ALTER TABLE `marca` DISABLE KEYS */;
+INSERT INTO `marca` VALUES (1,'LG'),(2,'Acer'),(3,'Marca qualquer de roupa'),(4,'Apple');
+/*!40000 ALTER TABLE `marca` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-27 10:44:34
+-- Dump completed on 2022-12-04 15:18:25
