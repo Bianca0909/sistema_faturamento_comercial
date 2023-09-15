@@ -4,6 +4,8 @@
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
+ Projeto criado para a disciplina de Programação de Soluções Computacionais
+
 ## Como Executar
 
 1. Clone o repositório e acesse a pasta do projeto
